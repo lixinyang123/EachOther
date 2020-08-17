@@ -1,0 +1,10 @@
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: block;
+    width: 100%;
+    height: 340px;
+    position: relative;
+    z-index: 0;
+}
