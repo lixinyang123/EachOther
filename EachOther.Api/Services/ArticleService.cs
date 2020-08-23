@@ -17,6 +17,11 @@ namespace EachOther.Api.Services
             database = redis.GetDatabase();
         }
 
+        public int GetArticleCount()
+        {
+            return Convert.ToInt32(database.ListLength("articles"));
+        }
+
         public List<Article> GetArticles(int start, int end)
         {
             RedisValue[] values = database.ListRange(key,start,end);

@@ -15,27 +15,39 @@ namespace EachOther.Api.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly ArticleService articleService;
+        private readonly int pageSize = 12;
 
         public ArticleController(ArticleService articleService)
         {
             this.articleService = articleService;
         }
 
-        [HttpGet("GetArticles")]
-        public IActionResult GetAllArticles()
+        //矫正页码
+        private int CorrectIndex(int index, int pageCount)
         {
-            List<Article> articles = articleService.GetArticles(0,-1);
+            //页码<1时留在第一页
+            index = index < 1 ? 1 : index;
+            //页码>总页数时留在最后一页
+            index = index > pageCount ? pageCount : index;
+            //如果没有博客时留在第一页
+            index = pageCount == 0 ? 1 : index;
+            return index;
+        }
+
+        [HttpGet("GetArticles")]
+        public IActionResult GetArticles(int index)
+        {
+            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleService.GetArticleCount()) / pageSize));
+            index = CorrectIndex(index, pageCount);
+
+            List<Article> articles = articleService.GetArticles((index-1)*pageSize, pageSize);
             return Content(JsonSerializer.Serialize(articles));
         }
 
         [HttpGet("AddArticles")]
-        public IActionResult AddArticles()
+        public IActionResult AddArticles(Article article)
         {
-            var flag = articleService.AddArticle(new Article()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Title = "afasdfawef"
-            });
+            var flag = articleService.AddArticle(article);
             return Content(flag.ToString());
         }
 
@@ -44,6 +56,13 @@ namespace EachOther.Api.Controllers
         {
             var flag = articleService.RemoveArticle(id);
             return RedirectToAction("GetArticles");
+        }
+
+        [HttpGet("EditArticles")]
+        public IActionResult EditArticles(Article article)
+        {
+            var flag = articleService.EditArticle(article);
+            return Content(flag.ToString());
         }
 
     }
