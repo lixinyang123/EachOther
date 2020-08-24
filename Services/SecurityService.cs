@@ -1,4 +1,4 @@
-namespace EachOther.Api.Services
+namespace EachOther.Services
 {
     class SecurityService
     {

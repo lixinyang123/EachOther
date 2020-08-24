@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using StackExchange.Redis;
-using EachOther.Api.Models;
-using EachOther.Api.Data;
+using EachOther.Models;
+using EachOther.Data;
 
-namespace EachOther.Api.Services
+namespace EachOther.Services
 {
     public class ArticleService : ArticleDbContext
     {

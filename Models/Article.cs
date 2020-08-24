@@ -1,18 +1,24 @@
 using System;
 using System.Collections.Generic;
 
-namespace EachOther.Api.Models
+namespace EachOther.Models
 {
-    public class Comment
+    public class Article
     {
-        public Comment()
+        public Article()
         {
             Comments = new List<Comment>();
         }
 
         public string Id {get; set;}
 
+        public string Title {get; set;}
+
+        public string Overview {get; set;}
+
         public string Content {get; set;}
+
+        public string Category {get; set;}
 
         public DateTime Date {get; set;}
 

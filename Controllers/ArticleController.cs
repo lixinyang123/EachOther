@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using EachOther.Api.Services;
-using EachOther.Api.Models;
+using EachOther.Services;
+using EachOther.Models;
 
-namespace EachOther.Api.Controllers
+namespace EachOther.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
     public class ArticleController : ControllerBase
     {
         private readonly ArticleService articleService;
@@ -34,7 +29,6 @@ namespace EachOther.Api.Controllers
             return index;
         }
 
-        [HttpGet("GetArticles")]
         public IActionResult GetArticles(int index)
         {
             int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleService.GetArticleCount()) / pageSize));
@@ -44,21 +38,18 @@ namespace EachOther.Api.Controllers
             return Content(JsonSerializer.Serialize(articles));
         }
 
-        [HttpGet("AddArticles")]
         public IActionResult AddArticles(Article article)
         {
             var flag = articleService.AddArticle(article);
             return Content(flag.ToString());
         }
 
-        [HttpGet("RemoveArticle")]
         public IActionResult RemoveArticle(string id)
         {
             var flag = articleService.RemoveArticle(id);
             return RedirectToAction("GetArticles");
         }
 
-        [HttpGet("EditArticles")]
         public IActionResult EditArticles(Article article)
         {
             var flag = articleService.EditArticle(article);

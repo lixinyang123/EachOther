@@ -1,6 +1,6 @@
 using StackExchange.Redis;
 
-namespace EachOther.Api.Data
+namespace EachOther.Data
 {
     public class ArticleDbContext
     {
