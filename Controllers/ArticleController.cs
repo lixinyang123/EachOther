@@ -7,6 +7,7 @@ using EachOther.Models;
 using EachOther.Filter;
 using EachOther.ViewModels;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace EachOther.Controllers
 {
@@ -71,10 +72,15 @@ namespace EachOther.Controllers
             return Content(flag.ToString());
         }
 
+        public IActionResult Detail()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult UploadImage([FromForm]IFormFile upload)
         {
-            return Content("");
+            return Json(new {Default = "https://corehome.oss-accelerate.aliyuncs.com/images/f.jpg"});
         }
 
     }
