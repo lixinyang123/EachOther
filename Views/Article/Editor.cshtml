@@ -1,0 +1,38 @@
+@model ArticleViewModel
+
+<script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+<link rel="stylesheet" href="/css/article/editor.css" />
+
+<script src="/js/article/editor.js"></script>
+
+<div class="container mt-5">
+    <h1 class="display-4">Editor</h1>
+    <hr />
+
+    <form asp-action="@ViewBag.Action" method="post">
+
+        <input asp-for="Id" type="hidden" />
+
+        <label asp-for="Title"></label>*
+        <input asp-for="Title" type="text" autocomplete="off" class="form-control" />
+
+        <label asp-for="Overview"></label>*
+        <input asp-for="Overview" type="text" autocomplete="off" class="form-control" />
+
+        <label asp-for="Content"></label>*
+        <div id="editor"></div>
+
+        <script type="text/javascript">
+            ClassicEditor
+            .create( document.querySelector('#editor'),{
+                extraPlugins: [ MyCustomUploadAdapterPlugin ]
+            })
+            .catch( error => {
+                console.error( error );
+            });
+        </script>
+
+        <br />
+        <input type="submit" value="Upload" class="btn btn-success" />
+    </form>
+</div>

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using EachOther.Services;
 using EachOther.Models;
 using EachOther.Filter;
+using EachOther.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace EachOther.Controllers
 {
@@ -45,7 +47,13 @@ namespace EachOther.Controllers
             return Content(JsonSerializer.Serialize(articles));
         }
 
-        public IActionResult AddArticles(Article article)
+        public IActionResult AddArticle()
+        {
+            return View("Editor",new ArticleViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult AddArticle(Article article)
         {
             var flag = articleService.AddArticle(article);
             return Content(flag.ToString());
@@ -61,6 +69,12 @@ namespace EachOther.Controllers
         {
             var flag = articleService.EditArticle(article);
             return Content(flag.ToString());
+        }
+
+        [HttpPost]
+        public IActionResult UploadImage([FromForm]IFormFile upload)
+        {
+            return Content("");
         }
 
     }
