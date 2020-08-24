@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using System.Text.Json;
 using StackExchange.Redis;
 using EachOther.Api.Models;
+using EachOther.Api.Data;
 
 namespace EachOther.Api.Services
 {
-    public class ArticleService
+    public class ArticleService : ArticleDbContext
     {
-        private IDatabase database;
-        private static string key = "articles";
-
-        public ArticleService()
-        {
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
-            database = redis.GetDatabase();
-        }
-
         public int GetArticleCount()
         {
             return Convert.ToInt32(database.ListLength("articles"));
