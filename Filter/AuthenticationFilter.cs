@@ -20,7 +20,7 @@ namespace EachOther.Filter
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (environment.IsDevelopment())
+            if (!environment.IsDevelopment())
             {
                 IdentityAuthorization(context);
             }
