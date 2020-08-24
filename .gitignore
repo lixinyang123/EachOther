@@ -2,3 +2,6 @@ obj
 bin
 .vscode
 dump.rdb
+lib
+.min.js
+.min.css

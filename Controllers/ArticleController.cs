@@ -7,7 +7,7 @@ using EachOther.Models;
 
 namespace EachOther.Controllers
 {
-    public class ArticleController : ControllerBase
+    public class ArticleController : Controller
     {
         private readonly ArticleService articleService;
         private readonly int pageSize = 12;
@@ -15,6 +15,11 @@ namespace EachOther.Controllers
         public ArticleController(ArticleService articleService)
         {
             this.articleService = articleService;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
 
         //矫正页码
