@@ -4,9 +4,11 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using EachOther.Services;
 using EachOther.Models;
+using EachOther.Filter;
 
 namespace EachOther.Controllers
 {
+    [TypeFilter(typeof(AuthorizationFilter))]
     public class ArticleController : Controller
     {
         private readonly ArticleService articleService;

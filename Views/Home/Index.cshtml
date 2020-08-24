@@ -1,48 +1,61 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<link rel="stylesheet" href="/css/home/index.css"/>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EachOther</title>
 
-<!--body-->
-<div id="main" class="container">
-    
-    <ul class="cb-slideshow">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <div class="container-fluid">
-        <div class="row cb-slideshow-text-container ">
+    <link rel="stylesheet" href="/css/home/index.css" />
+    <script src="/js/home/index.js"></script>
+</head>
 
-            <div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
-                <header class="mb-5"><h4>标题*****</h4></header>
-                
-                <p id="tips" class="mb-3">输入 手机号&微信号</p>
-                
-                <form class="form-inline">
-                    <select class="custom-select mb-3" id="inlineFormCustomSelectPref">
-                        <option selected>类别</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    
-                    <input type="text" class="form-control mb-3"/>
-                </form>
+<body>
+    <!--body-->
+    <div id="main" class="container">
+        
+        <ul class="cb-slideshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
 
-                <button class="btn btn-primary">查询</button>
+        <div class="container-fluid">
+            <div class="row cb-slideshow-text-container ">
 
+                <div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+                    <header class="mb-5"><h4>EachOther</h4></header>
+                                        
+                    <form asp-controller="Home" asp-action="VerifyPassword" class="form-inline">
+                        <select onchange="getPassword()" class="custom-select mb-3">
+                            <option selected>Identity</option>
+                            <option value="0">FJH</option>
+                            <option value="1">LXY</option>
+                        </select>
+
+                        <input id="pwd" name="pwd" type="password" class="form-control mb-3" placeholder="Enter the verification code to sign in" hidden/>
+                        <input type="submit" class="btn btn-primary mb-3" value="Login"/>
+                    </form>
+
+                </div>
+            </div>
+            
+            <div class="footer-link">
+                <p><a href="/admin.html">&COPY; 2020 - EachOther</a></p>
             </div>
         </div>
         
-        <div class="footer-link">
-            <p><a href="/admin.html">&COPY; 2020 - EachOther</a></p>
-        </div>
     </div>
-    
-</div>
+</body>
+</html>
