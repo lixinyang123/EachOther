@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/shared/_layout.css" />
 </head>
 
 <body>
     <!--header-->
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                &nbsp;Demo
+            <a class="navbar-brand" asp-controller="Article" asp-action="Index">
+                &nbsp;EachOther
             </a>
             <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
                 <span class="navbar-toggler-icon"></span>
@@ -35,9 +37,25 @@
     </nav>
 
     <!--body-->
-    <div>
+    <div id="content">
         @RenderBody()
     </div>
+
+    <!--footer-->
+    <footer class="bd-footer text-muted">
+  
+        <div class="container-fluid p-3 p-md-5 text-right">
+  
+            <p>Designed and Developed by
+                <a href="https://www.lllxy.net/" target="blank"><strong>LLLXY</strong></a>
+                ❤
+                <a href="https://付京华.我爱你/" target="blank"><strong>FJH</strong></a>
+            </p>
+  
+            <p>© 2020 - EachOther</p>
+        </div>
+  
+    </footer>
 
 </body>
 </html>

@@ -1,9 +1,14 @@
+a {
+    color: #666666;
+}
+
 #post {
     font-family: "Poppins", Arial, sans-serif;
     font-size: 15px;
     line-height: 1.8;
     font-weight: 400;
     color: #666666;
+    padding: 0;
 }
 
 #post > h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
@@ -25,6 +30,7 @@
 .no-gutters {
     margin-right: 0;
     margin-left: 0; 
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
   
 .no-gutters > .col, .no-gutters > [class*="col-"] {
@@ -74,7 +80,6 @@
 @media (max-width: 767.98px) {
     .blog-entry .img {
         margin: 0 auto;
-        margin-bottom: 20px; 
     } 
 }
 
@@ -138,7 +143,7 @@
 
 .blog-entry .text .meta-wrap .meta span {
     font-size: 13px;
-    margin: 0 10px 0 0;
+    margin: 0 0 0 0;
     color: #bfbfbf; 
 }
 
