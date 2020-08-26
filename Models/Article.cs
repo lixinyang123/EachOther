@@ -18,7 +18,7 @@ namespace EachOther.Models
 
         public string Content {get; set;}
 
-        public long Link {get; set;}
+        public long Like {get; set;}
 
         public DateTime Date {get; set;}
 

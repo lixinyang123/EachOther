@@ -11,8 +11,8 @@
       "destination": "wwwroot/lib/bootstrap"
     },
     {
-      "library": "ckeditor5@21.0.0",
-      "destination": "wwwroot/lib/ckeditor5"
+      "library": "ckeditor4@4.14.1",
+      "destination": "wwwroot/lib/ckeditor4"
     }
   ]
 }

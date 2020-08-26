@@ -54,10 +54,26 @@ namespace EachOther.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddArticle(Article article)
+        public IActionResult AddArticle(ArticleViewModel viewModel)
         {
-            var flag = articleService.AddArticle(article);
-            return Content(flag.ToString());
+            if(ModelState.IsValid)
+            {
+                Article article = new Article()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = viewModel.Title,
+                    Overview = viewModel.Overview,
+                    Content = viewModel.Content,
+                    Like = 0,
+                    Date = DateTime.Now
+                };
+                var flag = articleService.AddArticle(article);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Editor",viewModel);
+            }
         }
 
         public IActionResult RemoveArticle(string id)
@@ -77,10 +93,19 @@ namespace EachOther.Controllers
             return View();
         }
 
+
+        // ckeditor4 中 config.js 中添加 config.filebrowserImageUploadUrl= "/Article/UploadImage";
         [HttpPost]
         public IActionResult UploadImage([FromForm]IFormFile upload)
         {
-            return Json(new {Default = "https://corehome.oss-accelerate.aliyuncs.com/images/f.jpg"});
+            return Json(
+                new
+                {
+                    uploaded = 1,
+                    fileName = Guid.NewGuid().ToString(),
+                    url = "https://corehome.oss-accelerate.aliyuncs.com/images/f.jpg"
+                }
+            );
         }
 
     }
