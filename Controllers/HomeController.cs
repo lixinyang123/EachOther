@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using EachOther.Models;
+using EachOther.ViewModels;
 using EachOther.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

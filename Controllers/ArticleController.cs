@@ -1,25 +1,25 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using EachOther.Services;
 using EachOther.Models;
 using EachOther.Filter;
 using EachOther.ViewModels;
 using Microsoft.AspNetCore.Http;
-using System.IO;
+using EachOther.Data;
 
 namespace EachOther.Controllers
 {
     [TypeFilter(typeof(AuthorizationFilter))]
     public class ArticleController : Controller
     {
-        private readonly ArticleService articleService;
+        private readonly ArticleDbContext articleDbContext;
         private readonly int pageSize = 12;
 
-        public ArticleController(ArticleService articleService)
+        public ArticleController(ArticleDbContext articleDbContext)
         {
-            this.articleService = articleService;
+            this.articleDbContext = articleDbContext;
         }
 
         public IActionResult Index()
@@ -41,10 +41,14 @@ namespace EachOther.Controllers
 
         public IActionResult GetArticles(int index)
         {
-            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleService.GetArticleCount()) / pageSize));
+            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleDbContext.Articles.Count()) / pageSize));
             index = CorrectIndex(index, pageCount);
 
-            List<Article> articles = articleService.GetArticles((index-1)*pageSize, pageSize);
+            List<Article> articles = articleDbContext.Articles
+                .OrderByDescending(i=>i.Id)
+                .Skip((index-1)*pageSize)
+                .Take(pageSize).ToList();
+
             return Content(JsonSerializer.Serialize(articles));
         }
 
@@ -60,14 +64,14 @@ namespace EachOther.Controllers
             {
                 Article article = new Article()
                 {
-                    Id = Guid.NewGuid().ToString(),
                     Title = viewModel.Title,
                     Overview = viewModel.Overview,
                     Content = viewModel.Content,
                     Like = 0,
                     Date = DateTime.Now
                 };
-                var flag = articleService.AddArticle(article);
+                articleDbContext.Articles.Add(article);
+                articleDbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
@@ -76,16 +80,14 @@ namespace EachOther.Controllers
             }
         }
 
-        public IActionResult RemoveArticle(string id)
+        public IActionResult RemoveArticle(int id)
         {
-            var flag = articleService.RemoveArticle(id);
             return RedirectToAction("GetArticles");
         }
 
         public IActionResult EditArticles(Article article)
         {
-            var flag = articleService.EditArticle(article);
-            return Content(flag.ToString());
+            return Ok();
         }
 
         public IActionResult Detail()

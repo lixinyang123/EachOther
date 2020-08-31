@@ -5,12 +5,7 @@ namespace EachOther.Models
 {
     public class Article
     {
-        public Article()
-        {
-            Comments = new List<Comment>();
-        }
-
-        public string Id {get; set;}
+        public int Id {get; set;}
 
         public string Title {get; set;}
 

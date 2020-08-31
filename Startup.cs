@@ -1,10 +1,14 @@
 using System;
+using EachOther.Data;
 using EachOther.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 namespace EachOther
 {
@@ -21,8 +25,15 @@ namespace EachOther
         {
             services.AddControllersWithViews();
 
+            services.AddDbContext<ArticleDbContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("EachOther"), mySqlOptions =>
+                {
+                    mySqlOptions.ServerVersion(new ServerVersion(new Version(8, 0, 18), ServerType.MySql));
+                });
+            });
+
             services.AddSingleton(new SecurityService("Key.txt", Guid.NewGuid().ToString().Replace("-", "")));
-            services.AddSingleton<ArticleService>();
             services.AddSingleton<NotifyService>();
         }
 

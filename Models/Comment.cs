@@ -5,17 +5,16 @@ namespace EachOther.Models
 {
     public class Comment
     {
-        public Comment()
-        {
-            Comments = new List<Comment>();
-        }
+        public int Id {get; set;}
 
-        public string Id {get; set;}
+        public int ArticleId {get; set;}
+
+        public Article Article {get; set;}
 
         public string Content {get; set;}
 
         public DateTime Date {get; set;}
 
-        public List<Comment> Comments {get; set;}
+        public List<Reply> Replies {get; set;}
     }
 }
