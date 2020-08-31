@@ -5,6 +5,8 @@ namespace EachOther.Data
 {
     public class ArticleDbContext : DbContext
     {
+        public ArticleDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Comment>()
