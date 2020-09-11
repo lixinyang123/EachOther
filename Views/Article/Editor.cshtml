@@ -6,9 +6,9 @@
     <h1 class="display-4">Editor</h1>
     <hr />
 
-    <form asp-controller="Article" asp-action="AddArticle" method="post">
+    <form asp-controller="Article" asp-action="@ViewBag.Action" method="post">
 
-        <input asp-for="Id" type="hidden" />
+        <input asp-for="ArticleCode" type="hidden" />
 
         <label asp-for="Title"></label>*
         <input asp-for="Title" type="text" autocomplete="off" class="form-control" />

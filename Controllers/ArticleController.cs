@@ -54,6 +54,7 @@ namespace EachOther.Controllers
 
         public IActionResult AddArticle()
         {
+            ViewBag.Action = "AddArticle";
             return View("Editor",new ArticleViewModel());
         }
 
@@ -64,6 +65,7 @@ namespace EachOther.Controllers
             {
                 Article article = new Article()
                 {
+                    ArticleCode = Guid.NewGuid().ToString(),
                     Title = viewModel.Title,
                     Overview = viewModel.Overview,
                     Content = viewModel.Content,
@@ -80,19 +82,41 @@ namespace EachOther.Controllers
             }
         }
 
-        public IActionResult RemoveArticle(int id)
+        public IActionResult RemoveArticle(string articleCode)
         {
-            return RedirectToAction("GetArticles");
+            articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode));
+            return RedirectToAction("Index");
         }
 
-        public IActionResult EditArticles(Article article)
+        public IActionResult EditArticles(string articleCode)
         {
-            return Ok();
+            ViewBag.Action = "EditArticles";
+            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode);
+            return View("Editor",article);
         }
 
-        public IActionResult Detail()
+        [HttpPost]
+        public IActionResult EditArticles(ArticleViewModel viewModel)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == viewModel.ArticleCode);
+                article.Title = viewModel.Title;
+                article.Overview = viewModel.Overview;
+                article.Content = viewModel.Content;
+                articleDbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Editor",viewModel);
+            }
+        }
+
+        public IActionResult Detail(string articleCode)
+        {
+            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode);
+            return View(article);
         }
 
 

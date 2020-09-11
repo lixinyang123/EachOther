@@ -7,6 +7,8 @@ namespace EachOther.Models
     {
         public int Id {get; set;}
 
+        public string ArticleCode {get; set;}
+
         public string Title {get; set;}
 
         public string Overview {get; set;}

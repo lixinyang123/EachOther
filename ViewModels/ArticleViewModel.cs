@@ -4,7 +4,7 @@ namespace EachOther.ViewModels
 {
     public class ArticleViewModel
     {
-        public string Id {get; set;}
+        public string ArticleCode {get; set;}
 
         [Required]
         public string Title {get; set;}

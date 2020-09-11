@@ -14,6 +14,7 @@ namespace EachOther.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ArticleCode = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
