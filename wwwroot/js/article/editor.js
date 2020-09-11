@@ -18,7 +18,7 @@ function uploadCover() {
     uploadingState(true, "Upload Cover");
 
     var formData = new FormData();
-    formData.append("file", document.querySelector("#fileSelector").files[0]);
+    formData.append("upload", document.querySelector("#fileSelector").files[0]);
 
     $.ajax({
         url: "/Article/UploadCover",

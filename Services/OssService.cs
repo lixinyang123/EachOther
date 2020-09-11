@@ -19,7 +19,7 @@ namespace EachOther.Services
 
         public string UploadCover(Stream stream)
         {
-            string fileName = Guid.NewGuid().ToString();
+            string fileName = Guid.NewGuid().ToString() + ".jpg";
             string path = "covers/";
             client.PutObject(config.BucketName, path + fileName, stream);
             return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
@@ -27,7 +27,7 @@ namespace EachOther.Services
 
         public string UploadPic(Stream stream)
         {
-            string fileName = Guid.NewGuid().ToString();
+            string fileName = Guid.NewGuid().ToString() + ".jpg";
             string path = "articles/";
             client.PutObject(config.BucketName, path + fileName, stream);
             return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
