@@ -13,6 +13,17 @@
         <label asp-for="Title"></label>*
         <input asp-for="Title" type="text" autocomplete="off" class="form-control" />
 
+        <div>
+            <label asp-for="CoverUrl"></label>*
+            <div class="input-group mb-3">
+                <input asp-for="CoverUrl" type="text" autocomplete="off" class="form-control" id="coverUrl" />
+                <input id="fileSelector" type="file" onchange="uploadCover()" hidden />
+                <div class="input-group-append">
+                    <button id="uploading" class="btn btn-outline-secondary" type="button" onclick="showSelector()">Upload Cover</button>
+                </div>
+            </div>
+        </div>
+
         <label asp-for="Overview"></label>*
         <input asp-for="Overview" type="text" autocomplete="off" class="form-control" />
 

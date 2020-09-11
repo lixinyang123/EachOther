@@ -70,6 +70,7 @@ namespace EachOther.Controllers
                 {
                     ArticleCode = Guid.NewGuid().ToString(),
                     Title = viewModel.Title,
+                    CoverUrl = viewModel.CoverUrl,
                     Overview = viewModel.Overview,
                     Content = viewModel.Content,
                     Like = 0,
@@ -105,6 +106,7 @@ namespace EachOther.Controllers
             {
                 Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == viewModel.ArticleCode);
                 article.Title = viewModel.Title;
+                article.CoverUrl = viewModel.CoverUrl;
                 article.Overview = viewModel.Overview;
                 article.Content = viewModel.Content;
                 articleDbContext.SaveChanges();
@@ -122,6 +124,11 @@ namespace EachOther.Controllers
             return View(article);
         }
 
+         [HttpPost]
+        public IActionResult UploadCover([FromForm]IFormFile upload)
+        {
+            return Content(ossService.UploadCover(upload.OpenReadStream()));
+        }
 
         // ckeditor4 中 config.js 中添加 config.filebrowserImageUploadUrl= "/Article/UploadImage";
         [HttpPost]

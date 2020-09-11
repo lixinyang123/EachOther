@@ -10,6 +10,9 @@ namespace EachOther.ViewModels
         public string Title {get; set;}
 
         [Required]
+        public string CoverUrl {get; set;}
+
+        [Required]
         public string Overview {get; set;}
 
         [Required]

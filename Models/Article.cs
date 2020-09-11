@@ -11,6 +11,8 @@ namespace EachOther.Models
 
         public string Title {get; set;}
 
+        public string CoverUrl {get; set;}
+
         public string Overview {get; set;}
 
         public string Content {get; set;}
