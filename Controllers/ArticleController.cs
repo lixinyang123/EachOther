@@ -8,6 +8,7 @@ using EachOther.Filter;
 using EachOther.ViewModels;
 using Microsoft.AspNetCore.Http;
 using EachOther.Data;
+using EachOther.Services;
 
 namespace EachOther.Controllers
 {
@@ -15,11 +16,13 @@ namespace EachOther.Controllers
     public class ArticleController : Controller
     {
         private readonly ArticleDbContext articleDbContext;
+        private readonly OssService ossService;
         private readonly int pageSize = 12;
 
-        public ArticleController(ArticleDbContext articleDbContext)
+        public ArticleController(ArticleDbContext articleDbContext, OssService ossService)
         {
             this.articleDbContext = articleDbContext;
+            this.ossService = ossService;
         }
 
         public IActionResult Index()
@@ -129,7 +132,7 @@ namespace EachOther.Controllers
                 {
                     uploaded = 1,
                     fileName = Guid.NewGuid().ToString(),
-                    url = "https://corehome.oss-accelerate.aliyuncs.com/images/f.jpg"
+                    url = ossService.UploadPic(upload.OpenReadStream())
                 }
             );
         }

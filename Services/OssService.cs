@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Web;
 using Aliyun.OSS;
@@ -16,16 +17,18 @@ namespace EachOther.Services
             this.config = config;
         }
 
-        public string UploadCover(string fileName, Stream stream)
+        public string UploadCover(Stream stream)
         {
-            string path = "cover/";
+            string fileName = Guid.NewGuid().ToString();
+            string path = "covers/";
             client.PutObject(config.BucketName, path + fileName, stream);
             return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
         }
 
-        public string UploadPic(string fileName, Stream stream)
+        public string UploadPic(Stream stream)
         {
-            string path = "images/";
+            string fileName = Guid.NewGuid().ToString();
+            string path = "articles/";
             client.PutObject(config.BucketName, path + fileName, stream);
             return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
         }
