@@ -1,5 +1,6 @@
 using System;
 using EachOther.Data;
+using EachOther.Models;
 using EachOther.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace EachOther
 
             services.AddSingleton(new SecurityService("Key.txt", Guid.NewGuid().ToString().Replace("-", "")));
             services.AddSingleton<NotifyService>();
+            services.AddSingleton(new OssService(Configuration.GetSection("OssConfig").Get<OssConfig>()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ArticleDbContext articleDbContext)
