@@ -1,5 +1,5 @@
 function upload() {
-    document.querySelector("#content").value = CKEDITOR.instances.htmlEditor.getData();
+    document.querySelector("#articleContent").value = CKEDITOR.instances.htmlEditor.getData();
     document.querySelector("form").submit();
 }
 
