@@ -19,7 +19,7 @@ namespace EachOther.Models
 
         public long Like {get; set;}
 
-        public DateTime Date {get; set;}
+        public string Date {get; set;}
 
         public List<Comment> Comments {get; set;}
     }

@@ -74,7 +74,7 @@ namespace EachOther.Controllers
                     Overview = viewModel.Overview,
                     Content = viewModel.Content,
                     Like = 0,
-                    Date = DateTime.Now
+                    Date = DateTime.Now.ToString()
                 };
                 articleDbContext.Articles.Add(article);
                 articleDbContext.SaveChanges();
@@ -86,16 +86,16 @@ namespace EachOther.Controllers
             }
         }
 
-        public IActionResult RemoveArticle(string articleCode)
+        public IActionResult RemoveArticle(string id)
         {
-            articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode));
+            articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == id));
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditArticles(string articleCode)
+        public IActionResult EditArticles(string id)
         {
             ViewBag.Action = "EditArticles";
-            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode);
+            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
             return View("Editor",article);
         }
 
@@ -118,9 +118,9 @@ namespace EachOther.Controllers
             }
         }
 
-        public IActionResult Detail(string articleCode)
+        public IActionResult Detail(string id)
         {
-            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == articleCode);
+            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
             return View(article);
         }
 

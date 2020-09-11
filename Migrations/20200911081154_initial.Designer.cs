@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EachOther.Migrations
 {
     [DbContext(typeof(ArticleDbContext))]
-    [Migration("20200911065026_AddCover")]
-    partial class AddCover
+    [Migration("20200911081154_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,8 +34,8 @@ namespace EachOther.Migrations
                     b.Property<string>("CoverUrl")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("Date")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("Like")
                         .HasColumnType("bigint");

@@ -32,8 +32,8 @@ namespace EachOther.Migrations
                     b.Property<string>("CoverUrl")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("Date")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<long>("Like")
                         .HasColumnType("bigint");

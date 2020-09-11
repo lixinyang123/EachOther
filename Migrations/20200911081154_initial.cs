@@ -16,10 +16,11 @@ namespace EachOther.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ArticleCode = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
+                    CoverUrl = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Like = table.Column<long>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

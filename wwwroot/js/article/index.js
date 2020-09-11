@@ -8,24 +8,31 @@ function getArticles(index) {
         dataType: 'text',
         success: function (data) {
             let articles = JSON.parse(data.toString());
-            articles.forEach(element => {
-                createArticle(element);
-            });
+            for(let i=0;i<articles.length;i++){
+                if(i%2 == 0) {
+                    createArticle(articles[i],"active");
+                }
+                else{
+                    createArticle(articles[i],"");
+                }
+            }
         },
         error: error => console.log(error)
     });
 }
 
-function createArticle(article) {
+function createArticle(article, active) {
+
     var html = `
         <div class="col-md-4 d-flex">
-            <div class="blog-entry">
-                <a asp-controller="Article" asp-action="Detail" class="img" style="background-image: url(${article.CoverUrl});"></a>
+            <div class="blog-entry ${active}">
+                <a href="/Article/Detail/${article.ArticleCode}" class="img" style="background-image: url(${article.CoverUrl});"></a>
                 <div class="text p-4">
-                    <h3 class="mb-2"><a asp-controller="Article" asp-action="Detail">${article.Title}</a></h3>
+                    <h3 class="mb-2"><a href="/Article/Detail/${article.ArticleCode}" >${article.Title}</a></h3>
                     <div class="meta-wrap">
                         <p class="meta">
                             <span>${article.Date}</span>
+                            <span>|</span>
                             <span>0 Comment</span>
                         </p>
                     </div>

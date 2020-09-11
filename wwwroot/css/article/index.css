@@ -30,7 +30,6 @@ a {
 .no-gutters {
     margin-right: 0;
     margin-left: 0; 
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
   
 .no-gutters > .col, .no-gutters > [class*="col-"] {
@@ -46,7 +45,8 @@ a {
     -o-transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
 .blog-entry .img {
