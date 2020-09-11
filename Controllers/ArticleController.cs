@@ -82,6 +82,7 @@ namespace EachOther.Controllers
             }
             else
             {
+                ViewBag.Action = "AddArticle";
                 return View("Editor",viewModel);
             }
         }

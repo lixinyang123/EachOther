@@ -44,3 +44,4 @@ function upload() {
 }
 
 CKEDITOR.replace('htmlEditor');
+CKEDITOR.instances.htmlEditor.setData(document.querySelector("#articleContent").value);
