@@ -4,6 +4,7 @@ using EachOther.Models;
 using EachOther.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,11 @@ namespace EachOther
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookieOptions>(config =>
+            {
+                config.SameSite = SameSiteMode.Lax;
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ArticleDbContext>(options =>

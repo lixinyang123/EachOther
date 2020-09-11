@@ -39,32 +39,38 @@ namespace EachOther.Controllers
 
         public IActionResult Login(int id)
         {
-            string cacheKey = Guid.NewGuid().ToString();
-            Response.Cookies.Append("user", cacheKey, new CookieOptions()
-            {
-                Expires = DateTimeOffset.Now.AddDays(1)
-            });
-
+            string cacheKey = string.Empty;
+            
             //随机生成密码
             string password = Guid.NewGuid().ToString().Substring(0, 6);
-
-            //记录密码并设置过期时间为一分钟
-            cache.Set(cacheKey, password, DateTimeOffset.Now.AddMinutes(1));
+            
             try
             {
                 //发送密码到手机
                 if(id == 0)
                 {
+                    cacheKey = "Female";
                     notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther Login", password);
                 }
                 else if(id == 1)
                 {
+                    cacheKey = "Male";
                     notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther Login", password);
                 }
                 else
                 {
                     throw new Exception();
                 }
+                
+                //记录密码并设置过期时间为一分钟
+                cache.Set(cacheKey, password, DateTimeOffset.Now.AddMinutes(1));
+
+                Response.Cookies.Append("user", cacheKey, new CookieOptions()
+                {
+                    Expires = DateTimeOffset.Now.AddDays(1),
+                    SameSite = SameSiteMode.Lax
+                });
+
                 return Content("验证码已经发送");
             }
             catch (Exception)
