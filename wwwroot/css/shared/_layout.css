@@ -28,3 +28,7 @@ footer a {
 .btn, .form-control {
     border-radius: 0;
 }
+
+.marker {
+    background-color: yellow;
+}
