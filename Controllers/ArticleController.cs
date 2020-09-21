@@ -135,14 +135,21 @@ namespace EachOther.Controllers
         [HttpPost]
         public IActionResult UploadImage([FromForm]IFormFile upload)
         {
-            return Json(
-                new
-                {
-                    uploaded = 1,
-                    fileName = Guid.NewGuid().ToString(),
-                    url = ossService.UploadPic(upload.OpenReadStream())
-                }
-            );
+            try
+            {
+                return Json(
+                    new
+                    {
+                        uploaded = 1,
+                        fileName = Guid.NewGuid().ToString(),
+                        url = ossService.UploadPic(upload.OpenReadStream())
+                    }
+                );
+            }
+            catch(Exception)
+            {
+                return Json(new { uploaded = 0,fileName = "",url = "" });
+            }
         }
 
     }
