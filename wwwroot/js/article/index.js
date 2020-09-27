@@ -1,3 +1,9 @@
+function checkButtom() {
+    window.onscroll = ()=>{
+        
+    }
+}
+
 function getArticles(index) {
 
     let url = "/Article/GetArticles?index=" + index;
@@ -8,12 +14,17 @@ function getArticles(index) {
         dataType: 'text',
         success: function (data) {
             let articles = JSON.parse(data.toString());
-            for(let i=0;i<articles.length;i++){
-                if(i%2 == 0) {
-                    createArticle(articles[i],"active");
-                }
-                else{
-                    createArticle(articles[i],"");
+            if(articles.length != 0){
+                
+                document.querySelector("#nothing").setAttribute("hidden","hidden");
+
+                for(let i=0;i<articles.length;i++){
+                    if(i%2 == 0) {
+                        createArticle(articles[i],"active");
+                    }
+                    else{
+                        createArticle(articles[i],"");
+                    }
                 }
             }
         },
@@ -43,5 +54,5 @@ function createArticle(article, active) {
         </div>
     `;
 
-    document.querySelector("#post > div").innerHTML += html;
+    document.querySelector("#post > div.row.no-gutters").innerHTML += html;
 }

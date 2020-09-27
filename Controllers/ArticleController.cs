@@ -9,6 +9,7 @@ using EachOther.ViewModels;
 using Microsoft.AspNetCore.Http;
 using EachOther.Data;
 using EachOther.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace EachOther.Controllers
 {
@@ -17,12 +18,13 @@ namespace EachOther.Controllers
     {
         private readonly ArticleDbContext articleDbContext;
         private readonly OssService ossService;
-        private readonly int pageSize = 12;
+        private readonly int pageSize;
 
-        public ArticleController(ArticleDbContext articleDbContext, OssService ossService)
+        public ArticleController(IConfiguration configuration, ArticleDbContext articleDbContext, OssService ossService)
         {
             this.articleDbContext = articleDbContext;
             this.ossService = ossService;
+            pageSize = configuration.GetValue<int>("PageSize");
         }
 
         public IActionResult Index()
