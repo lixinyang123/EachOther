@@ -27,7 +27,9 @@
         </div>
     </div>
 
-    <div class="row no-gutters"></div>
+    <div class="row no-gutters">
+        <input id="pageCount" type="hidden" value="@ViewBag.pageCount" />
+    </div>
 </div>
 
-<script>getArticles(1);</script>
+<script>init();</script>

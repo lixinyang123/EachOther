@@ -1,10 +1,21 @@
+var index = 1;
+var pageCount = 0;
+
 function checkButtom() {
     window.onscroll = ()=>{
-        
+        if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
+            if(index < pageCount) {
+                getArticles(++index);
+                alert("加载第"+index+"页");
+            }
+            else{
+                alert("没有更多了");
+            }
+        }
     }
 }
 
-function getArticles(index) {
+function getArticles() {
 
     let url = "/Article/GetArticles?index=" + index;
 
@@ -55,4 +66,10 @@ function createArticle(article, active) {
     `;
 
     document.querySelector("#post > div.row.no-gutters").innerHTML += html;
+}
+
+function init() {
+    pageCount = document.querySelector("#pageCount").value;
+    getArticles();
+    checkButtom();
 }

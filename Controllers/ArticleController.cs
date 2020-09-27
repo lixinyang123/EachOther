@@ -29,6 +29,7 @@ namespace EachOther.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.pageCount = Math.Ceiling(articleDbContext.Articles.Count() / Convert.ToDouble(pageSize));
             return View();
         }
 
