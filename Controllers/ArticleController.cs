@@ -33,22 +33,9 @@ namespace EachOther.Controllers
             return View();
         }
 
-        //矫正页码
-        private int CorrectIndex(int index, int pageCount)
-        {
-            //页码<1时留在第一页
-            index = index < 1 ? 1 : index;
-            //页码>总页数时留在最后一页
-            index = index > pageCount ? pageCount : index;
-            //如果没有博客时留在第一页
-            index = pageCount == 0 ? 1 : index;
-            return index;
-        }
-
         public IActionResult GetArticles(int index)
         {
             int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleDbContext.Articles.Count()) / pageSize));
-            index = CorrectIndex(index, pageCount);
 
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
