@@ -33,13 +33,10 @@ namespace EachOther.Controllers
         {
             ViewBag.pageCount = Math.Ceiling(articleDbContext.Articles.Count() / Convert.ToDouble(pageSize));
             if(user == "Female") {
-
+                //允许编辑Female部分Article
             }
-            else if(user == "Male") {
-
-            }
-            else {
-                HttpContext.Response.Cookies.Delete("accessToken");
+            if(user == "Male") {
+                //允许编辑Male部分Article
             }
             return View();
         }
