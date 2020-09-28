@@ -19,17 +19,28 @@ namespace EachOther.Controllers
         private readonly ArticleDbContext articleDbContext;
         private readonly OssService ossService;
         private readonly int pageSize;
+        private readonly string user;
 
         public ArticleController(IConfiguration configuration, ArticleDbContext articleDbContext, OssService ossService)
         {
             this.articleDbContext = articleDbContext;
             this.ossService = ossService;
             pageSize = configuration.GetValue<int>("PageSize");
+            this.user = Request.Cookies["user"];
         }
 
         public IActionResult Index()
         {
             ViewBag.pageCount = Math.Ceiling(articleDbContext.Articles.Count() / Convert.ToDouble(pageSize));
+            if(user == "Female") {
+
+            }
+            else if(user == "Male") {
+
+            }
+            else {
+                HttpContext.Response.Cookies.Delete("accessToken");
+            }
             return View();
         }
 
