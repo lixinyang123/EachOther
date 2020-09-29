@@ -19,19 +19,18 @@ namespace EachOther.Controllers
         private readonly ArticleDbContext articleDbContext;
         private readonly OssService ossService;
         private readonly int pageSize;
-        private readonly string user;
 
         public ArticleController(IConfiguration configuration, ArticleDbContext articleDbContext, OssService ossService)
         {
             this.articleDbContext = articleDbContext;
             this.ossService = ossService;
             pageSize = configuration.GetValue<int>("PageSize");
-            this.user = Request.Cookies["user"];
         }
 
         public IActionResult Index()
         {
             ViewBag.pageCount = Math.Ceiling(articleDbContext.Articles.Count() / Convert.ToDouble(pageSize));
+            var user = Request.Cookies["user"];
             if(user == "Female") {
                 //允许编辑Female部分Article
             }
@@ -67,6 +66,7 @@ namespace EachOther.Controllers
                 Article article = new Article()
                 {
                     ArticleCode = Guid.NewGuid().ToString(),
+                    User = Request.Cookies["user"],
                     Title = viewModel.Title,
                     CoverUrl = viewModel.CoverUrl,
                     Overview = viewModel.Overview,

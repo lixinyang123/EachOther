@@ -8,6 +8,8 @@ namespace EachOther.Models
 
         public string ArticleCode {get; set;}
 
+        public string User {get; set;}
+
         public string Title {get; set;}
 
         public string CoverUrl {get; set;}
