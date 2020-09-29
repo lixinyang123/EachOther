@@ -18,12 +18,19 @@ namespace EachOther.Controllers
     {
         private readonly ArticleDbContext articleDbContext;
         private readonly OssService ossService;
+        private readonly NotifyService notifyService;
+        private readonly IConfiguration configuration;
         private readonly int pageSize;
 
-        public ArticleController(IConfiguration configuration, ArticleDbContext articleDbContext, OssService ossService)
+        public ArticleController(IConfiguration configuration, 
+            ArticleDbContext articleDbContext, 
+            OssService ossService,
+            NotifyService notifyService)
         {
             this.articleDbContext = articleDbContext;
             this.ossService = ossService;
+            this.notifyService = notifyService;
+            this.configuration = configuration;
             pageSize = configuration.GetValue<int>("PageSize");
         }
 
@@ -35,8 +42,6 @@ namespace EachOther.Controllers
 
         public IActionResult GetArticles(int index)
         {
-            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleDbContext.Articles.Count()) / pageSize));
-
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
                 .Skip((index-1)*pageSize)
@@ -44,6 +49,17 @@ namespace EachOther.Controllers
 
             return Content(JsonSerializer.Serialize(articles));
         }
+
+        // public IActionResult GetArticles(string id, int index)
+        // {
+        //     List<Article> articles = articleDbContext.Articles
+        //         .Where(i => i.User == Request.Cookies["user"])
+        //         .OrderByDescending(i => i.Id)
+        //         .Skip((index-1)*pageSize)
+        //         .Take(pageSize).ToList();
+
+        //     return Content(JsonSerializer.Serialize(articles));
+        // }
 
         public IActionResult AddArticle()
         {
@@ -69,6 +85,15 @@ namespace EachOther.Controllers
                 };
                 articleDbContext.Articles.Add(article);
                 articleDbContext.SaveChanges();
+
+                if(Request.Cookies["user"]=="Female")
+                {
+                    notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+                }
+                if(Request.Cookies["user"]=="Male")
+                {
+                    notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+                }
                 return RedirectToAction("Index");
             }
             else
