@@ -30,13 +30,6 @@ namespace EachOther.Controllers
         public IActionResult Index()
         {
             ViewBag.pageCount = Math.Ceiling(articleDbContext.Articles.Count() / Convert.ToDouble(pageSize));
-            var user = Request.Cookies["user"];
-            if(user == "Female") {
-                //允许编辑Female部分Article
-            }
-            if(user == "Male") {
-                //允许编辑Male部分Article
-            }
             return View();
         }
 
