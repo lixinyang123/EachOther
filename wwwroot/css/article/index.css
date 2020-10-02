@@ -7,6 +7,11 @@ a {
     color: #666666;
 }
 
+#post {
+    line-height: 1.8;
+    color: #666666;
+}
+
 #post > p {
     display: block;
     margin-block-start: 1em;
