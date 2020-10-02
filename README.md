@@ -1,2 +1,1 @@
 # EachOther
-彼此
