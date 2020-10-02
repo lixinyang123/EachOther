@@ -103,6 +103,11 @@ namespace EachOther.Controllers
             }
         }
 
+        public IActionResult Manager()
+        {
+            return View();
+        }
+
         public IActionResult RemoveArticle(string id)
         {
             articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == id));

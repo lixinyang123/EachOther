@@ -1,15 +1,17 @@
-var index = 1;
-var pageCount = 0;
+let index = 1;
+let pageCount = 0;
+let loadingState = isEnd = false;
 
 function checkButtom() {
     window.onscroll = ()=>{
         if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
             if(index < pageCount) {
-                getArticles(++index);
-                alert("加载第"+index+"页");
+                if(!loadingState) {
+                    getArticles(++index);
+                }
             }
             else{
-                alert("没有更多了");
+                if(!isEnd) { showEnd(); }
             }
         }
     }
@@ -17,6 +19,7 @@ function checkButtom() {
 
 function getArticles() {
 
+    loadingState = true;
     let url = "/Article/GetArticles?index=" + index;
 
     $.ajax({
@@ -37,6 +40,8 @@ function getArticles() {
                         createArticle(articles[i],"");
                     }
                 }
+
+                loadingState = false;
             }
         },
         error: error => console.log(error)
@@ -45,7 +50,7 @@ function getArticles() {
 
 function createArticle(article, active) {
 
-    var html = `
+    let html = `
         <div class="col-md-4 d-flex">
             <div class="blog-entry ${active}">
                 <a href="/Article/Detail/${article.ArticleCode}" class="img" style="background-image: url(${article.CoverUrl});"></a>
@@ -59,7 +64,7 @@ function createArticle(article, active) {
                         </p>
                     </div>
                     <p class="mb-4">${article.Overview}</p>
-                    <p><a asp-controller="Article" asp-action="Detail" class="btn-custom">Read More</span></a></p>
+                    <p><a href="/Article/Detail/${article.ArticleCode}" class="btn-custom">Read More</span></a></p>
                 </div>
             </div>
         </div>
@@ -68,8 +73,20 @@ function createArticle(article, active) {
     document.querySelector("#post > div.row.no-gutters").innerHTML += html;
 }
 
+function showEnd() {
+
+    let html = `
+        <div class="col text-center">
+            <p>什么都没了</p>
+        </div>
+    `;
+
+    document.querySelector("#endWarning").innerHTML += html;
+    isEnd = true;
+}
+
 function init() {
-    pageCount = document.querySelector("#pageCount").value;
+    pageCount = Number(document.querySelector("#pageCount").value);
     getArticles();
     checkButtom();
 }
