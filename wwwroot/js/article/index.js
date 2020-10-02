@@ -74,14 +74,7 @@ function createArticle(article, active) {
 }
 
 function showEnd() {
-
-    let html = `
-        <div class="col text-center">
-            <p>什么都没了</p>
-        </div>
-    `;
-
-    document.querySelector("#endWarning").innerHTML += html;
+    document.querySelector("#endWarning").removeAttribute("hidden");
     isEnd = true;
 }
 
