@@ -12,11 +12,11 @@ a {
     color: #666666;
 }
 
-#nothing > h2 {
+#loading > h2 {
     color: black;
 }
 
-#loading {
+#loading .container {
     padding-top: 3rem;
     padding-bottom: 5rem;
 }
