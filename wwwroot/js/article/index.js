@@ -30,14 +30,19 @@ function getArticles() {
             let articles = JSON.parse(data.toString());
             if(articles.length != 0){
                 
-                document.querySelector("#nothing").setAttribute("hidden","hidden");
+                document.querySelector("#loading").setAttribute("hidden","hidden");
 
-                for(let i=0;i<articles.length;i++){
-                    if(i%2 == 0) {
-                        createArticle(articles[i],"active");
-                    }
-                    else{
-                        createArticle(articles[i],"");
+                if(articles.length == 0) {
+                    document.querySelector("#nothing").removeAttribute("hidden");
+                }
+                else{
+                    for(let i=0;i<articles.length;i++){
+                        if(i%2 == 0) {
+                            createArticle(articles[i],"active");
+                        }
+                        else{
+                            createArticle(articles[i],"");
+                        }
                     }
                 }
 
