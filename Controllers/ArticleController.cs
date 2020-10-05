@@ -103,9 +103,9 @@ namespace EachOther.Controllers
             }
         }
 
-        //管理逻辑
         public IActionResult Manager(int index)
         {
+            //管理逻辑
             string user = Request.Cookies["user"];
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
