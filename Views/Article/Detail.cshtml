@@ -15,12 +15,12 @@
         @Html.Raw(Model.Content)
     </div>
 
-    <form asp-controller="Blog" asp-action="Detail" method="post">
+    <form method="post">
         <input type="hidden" value="@Model.ArticleCode" name="ArticleCode"/>
-        <textarea class="form-control mb-2" rows="4" placeholder="Comment" maxlength="1024" name="Detail"></textarea>
+        <textarea class="form-control mb-2" rows="4" placeholder="评论暂未开放" maxlength="1024" name="Detail"></textarea>
         <div class="row">
             <div class="col">
-                <input id="btn_submit" type="submit" class="btn btn-success float-left" value="Submit" />
+                <input disabled type="submit" class="btn btn-success float-left" value="发送" />
             </div>
         </div>
     </form>
@@ -30,11 +30,11 @@
         <div class="card comment-item mb-3">
             <div class="card-header">
                 <strong>LXY:</strong>
-                <span>hhhhhhhhhhhhhhhhhhhh</span>
+                <span>测试评论</span>
             </div>
 
             <div class="card-body">
-                <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                <p>fjh❤~</p>
             </div>
         </div>
 
