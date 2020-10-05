@@ -3,6 +3,7 @@ using System.Linq;
 using EachOther.Data;
 using EachOther.Filter;
 using EachOther.Models;
+using EachOther.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -32,5 +33,43 @@ namespace EachOther.Controllers
 
             return View(articles);
         }
+
+        public IActionResult RemoveArticle(string id)
+        {
+            articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == id));
+            articleDbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditArticles(string id)
+        {
+            ViewBag.Action = "EditArticles";
+            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
+            var viewModel = new ArticleViewModel()
+            {
+                
+            };
+            return RedirectToAction("Index","Editor",viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditArticles(ArticleViewModel viewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == viewModel.ArticleCode);
+                article.Title = viewModel.Title;
+                article.CoverUrl = viewModel.CoverUrl;
+                article.Overview = viewModel.Overview;
+                article.Content = viewModel.Content;
+                articleDbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Editor",viewModel);
+            }
+        }
+
     }
 }

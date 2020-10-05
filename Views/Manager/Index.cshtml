@@ -21,7 +21,7 @@
                                 <p class="card-text"><small class="text-muted">@article.Date</small></p>
                                 <div class="text-center">
                                     <a class="btn btn-warning">Edit</a>
-                                    <a class="btn btn-danger">Delete</a>
+                                    <a asp-controller="Manager" asp-action="RemoveArticle" asp-route-id="@article.ArticleCode" class="btn btn-danger">Delete</a>
                                 </div>
                             </div>
                         </div>

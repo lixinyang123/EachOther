@@ -5,7 +5,6 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using EachOther.Models;
 using EachOther.Filter;
-using EachOther.ViewModels;
 using Microsoft.AspNetCore.Http;
 using EachOther.Data;
 using EachOther.Services;
@@ -48,38 +47,6 @@ namespace EachOther.Controllers
                 .Take(pageSize).ToList();
 
             return Content(JsonSerializer.Serialize(articles));
-        }
-
-        public IActionResult RemoveArticle(string id)
-        {
-            articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == id));
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult EditArticles(string id)
-        {
-            ViewBag.Action = "EditArticles";
-            Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
-            return View("Editor",article);
-        }
-
-        [HttpPost]
-        public IActionResult EditArticles(ArticleViewModel viewModel)
-        {
-            if(ModelState.IsValid)
-            {
-                Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == viewModel.ArticleCode);
-                article.Title = viewModel.Title;
-                article.CoverUrl = viewModel.CoverUrl;
-                article.Overview = viewModel.Overview;
-                article.Content = viewModel.Content;
-                articleDbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View("Editor",viewModel);
-            }
         }
 
         public IActionResult Detail(string id)

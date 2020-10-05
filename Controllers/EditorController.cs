@@ -1,5 +1,6 @@
 using System;
 using EachOther.Data;
+using EachOther.Filter;
 using EachOther.Models;
 using EachOther.Services;
 using EachOther.ViewModels;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EachOther.Controllers
 {
+    [TypeFilter(typeof(AuthorizationFilter))]
     public class EditorController : Controller
     {
         private readonly ArticleDbContext articleDbContext;
