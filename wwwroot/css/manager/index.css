@@ -1,0 +1,53 @@
+a {
+    color: black;
+}
+
+.img {
+    display: block;
+    width: 100%;
+    height: 270px;
+    position: relative;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.img:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0028ff;
+    z-index: -1;
+    opacity: 0;
+}
+
+.card {
+    max-width: 540px;
+}
+
+.card:hover{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card .cover{
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.card .cover a{
+    display: block;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    transition: transform 0.2s ease-out;
+}
+
+.card .cover a:hover{
+    transform: scale(1.07);
+}

@@ -70,11 +70,6 @@ a {
     background: #0028ff;
     z-index: -1;
     opacity: 0;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
 }
 
 @media (max-width: 767.98px) {
