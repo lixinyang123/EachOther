@@ -104,11 +104,16 @@ namespace EachOther.Controllers
         }
 
         //管理逻辑
-        public IActionResult Manager()
+        public IActionResult Manager(int index)
         {
             string user = Request.Cookies["user"];
-            List<Article> articles = articleDbContext.Articles.Where(i => i.User == user).ToList();
-            return View();
+            List<Article> articles = articleDbContext.Articles
+                .OrderByDescending(i=>i.Id)
+                .Where(i => i.User == user)
+                .Skip((index-1)*pageSize)
+                .Take(pageSize).ToList();
+
+            return View(articles);
         }
 
         public IActionResult RemoveArticle(string id)
