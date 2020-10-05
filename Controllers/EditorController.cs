@@ -27,7 +27,7 @@ namespace EachOther.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Action = "AddArticle";
+            ViewBag.Action = "/Editor";
             return View(new ArticleViewModel());
         }
 
@@ -62,7 +62,7 @@ namespace EachOther.Controllers
             }
             else
             {
-                ViewBag.Action = "AddArticle";
+                ViewBag.Action = "/Editor";
                 return View(viewModel);
             }
         }
