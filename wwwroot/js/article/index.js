@@ -17,21 +17,19 @@ function getArticles() {
                 
                 document.querySelector("#loading").setAttribute("hidden","hidden");
 
-                if(articles.length == 0) {
-                    document.querySelector("#nothing").removeAttribute("hidden");
-                }
-                else{
-                    for(let i=0;i<articles.length;i++){
-                        if(i%2 == 0) {
-                            createArticle(articles[i],"active");
-                        }
-                        else{
-                            createArticle(articles[i],"");
-                        }
+                for(let i=0;i<articles.length;i++){
+                    if(i%2 == 0) {
+                        createArticle(articles[i],"active");
+                    }
+                    else{
+                        createArticle(articles[i],"");
                     }
                 }
 
                 loadingState = false;
+            }
+            else {
+                document.querySelector("#nothing").removeAttribute("hidden");
             }
         },
         error: error => console.log(error)

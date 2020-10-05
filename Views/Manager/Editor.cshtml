@@ -6,7 +6,7 @@
     <h1 class="display-4">Editor</h1>
     <hr />
 
-    <form action="@ViewBag.Action" method="post">
+    <form asp-controller="Editor" asp-action="@ViewBag.Action" method="post">
 
         <input asp-for="ArticleCode" type="hidden" />
 
@@ -35,5 +35,5 @@
 
     <button class="btn btn-primary mt-4 mb-4" onclick="upload()">Upload</button>
 
-    <script src="/js/article/editor.js"></script>
+    <script src="/js/editor/index.js"></script>
 </div>

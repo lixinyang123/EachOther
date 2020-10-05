@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EachOther.Data;
 using EachOther.Filter;
 using EachOther.Models;
+using EachOther.Services;
 using EachOther.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +15,17 @@ namespace EachOther.Controllers
     public class ManagerController : Controller
     {
         private readonly ArticleDbContext articleDbContext;
+        private readonly IConfiguration configuration;
+        private readonly NotifyService notifyService;
         private readonly int pageSize;
 
-        public ManagerController(IConfiguration configuration, ArticleDbContext articleDbContext)
+        public ManagerController(IConfiguration configuration, 
+            ArticleDbContext articleDbContext,
+            NotifyService notifyService)
         {
             this.articleDbContext = articleDbContext;
+            this.configuration = configuration;
+            this.notifyService = notifyService;
             pageSize = configuration.GetValue<int>("PageSize");
         }
         
@@ -34,6 +42,48 @@ namespace EachOther.Controllers
             return View(articles);
         }
 
+        public IActionResult AddArticle()
+        {
+            ViewBag.Action = "Index";
+            return View(new ArticleViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult AddArticle(ArticleViewModel viewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                Article article = new Article()
+                {
+                    ArticleCode = Guid.NewGuid().ToString(),
+                    User = Request.Cookies["user"],
+                    Title = viewModel.Title,
+                    CoverUrl = viewModel.CoverUrl,
+                    Overview = viewModel.Overview,
+                    Content = viewModel.Content,
+                    Like = 0,
+                    Date = DateTime.Now.ToString()
+                };
+                articleDbContext.Articles.Add(article);
+                articleDbContext.SaveChanges();
+
+                if(Request.Cookies["user"]=="Female")
+                {
+                    notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+                }
+                if(Request.Cookies["user"]=="Male")
+                {
+                    notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+                }
+                return RedirectToAction("Index","Article");
+            }
+            else
+            {
+                ViewBag.Action = "Index";
+                return View(viewModel);
+            }
+        }
+
         public IActionResult RemoveArticle(string id)
         {
             articleDbContext.Articles.Remove(articleDbContext.Articles.Single(i=>i.ArticleCode == id));
@@ -45,11 +95,15 @@ namespace EachOther.Controllers
         {
             ViewBag.Action = "EditArticles";
             Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
-            var viewModel = new ArticleViewModel()
+            ArticleViewModel viewModel = new ArticleViewModel()
             {
-                
+                ArticleCode = article.ArticleCode,
+                Title = article.Title,
+                CoverUrl = article.CoverUrl,
+                Overview = article.Overview,
+                Content = article.Content
             };
-            return RedirectToAction("Index","Editor",viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -63,11 +117,12 @@ namespace EachOther.Controllers
                 article.Overview = viewModel.Overview;
                 article.Content = viewModel.Content;
                 articleDbContext.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Article");
             }
             else
             {
-                return View("Editor",viewModel);
+                ViewBag.Action = "EditArticles";
+                return View(viewModel);
             }
         }
 
