@@ -31,7 +31,6 @@ namespace EachOther.Controllers
         
         public IActionResult Index(int index = 1)
         {
-            //管理逻辑
             string user = Request.Cookies["user"];
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
