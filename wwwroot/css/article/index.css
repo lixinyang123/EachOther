@@ -181,3 +181,33 @@ a {
     color: #666666;
     margin: 20px;
 }
+
+.gototop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.gototop.active {
+    visibility: visible;
+    color: white;
+}
+
+.gototop a {
+    width: 50px;
+    height: 50px;
+    display: table;
+    background: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.gototop a i {
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: bold;
+}

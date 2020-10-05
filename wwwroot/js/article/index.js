@@ -2,21 +2,6 @@ let index = 1;
 let pageCount = 0;
 let loadingState = isEnd = false;
 
-function checkButtom() {
-    window.onscroll = ()=>{
-        if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
-            if(index < pageCount) {
-                if(!loadingState) {
-                    getArticles(++index);
-                }
-            }
-            else{
-                if(!isEnd) { showEnd(); }
-            }
-        }
-    }
-}
-
 function getArticles() {
 
     loadingState = true;
@@ -83,8 +68,34 @@ function showEnd() {
     isEnd = true;
 }
 
+function MoveTop()
+{
+	$("html,body").animate({ scrollTop: 0 }, 500);
+}
+
 function init() {
     pageCount = Number(document.querySelector("#pageCount").value);
     getArticles();
-    checkButtom();
+
+    window.onscroll = () => {
+        // check is top
+		if (window.scrollY > 200) {
+			document.querySelector(".js-top").classList.add("active");
+		}
+		else {
+			document.querySelector(".js-top").classList.remove("active");
+        }
+
+        // check buttom
+        if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
+            if(index < pageCount) {
+                if(!loadingState) {
+                    getArticles(++index);
+                }
+            }
+            else{
+                if(!isEnd) { showEnd(); }
+            }
+        }
+    }
 }
