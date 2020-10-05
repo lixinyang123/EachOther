@@ -44,8 +44,8 @@ namespace EachOther.Controllers
 
         public IActionResult AddArticle()
         {
-            ViewBag.Action = "Index";
-            return View(new ArticleViewModel());
+            ViewBag.Action = "AddArticle";
+            return View("Editor",new ArticleViewModel());
         }
 
         [HttpPost]
@@ -79,8 +79,8 @@ namespace EachOther.Controllers
             }
             else
             {
-                ViewBag.Action = "Index";
-                return View(viewModel);
+                ViewBag.Action = "AddArticle";
+                return View("Editor",viewModel);
             }
         }
 
@@ -103,7 +103,7 @@ namespace EachOther.Controllers
                 Overview = article.Overview,
                 Content = article.Content
             };
-            return View(viewModel);
+            return View("Editor",viewModel);
         }
 
         [HttpPost]
@@ -122,7 +122,7 @@ namespace EachOther.Controllers
             else
             {
                 ViewBag.Action = "EditArticles";
-                return View(viewModel);
+                return View("Editor",viewModel);
             }
         }
 
