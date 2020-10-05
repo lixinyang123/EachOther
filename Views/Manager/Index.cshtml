@@ -20,8 +20,8 @@
                                 <p class="card-text">@article.Overview</p>
                                 <p class="card-text"><small class="text-muted">@article.Date</small></p>
                                 <div class="text-center">
-                                    <a asp-controller="Manager" asp-action="EditArticle" asp-route-id="@article.ArticleCode" class="btn btn-warning">Edit</a>
-                                    <a asp-controller="Manager" asp-action="RemoveArticle" asp-route-id="@article.ArticleCode" class="btn btn-danger">Delete</a>
+                                    <a asp-controller="Manager" asp-action="EditArticle" asp-route-id="@article.ArticleCode" class="btn btn-warning">编辑</a>
+                                    <a asp-controller="Manager" asp-action="RemoveArticle" asp-route-id="@article.ArticleCode" class="btn btn-danger">删除</a>
                                 </div>
                             </div>
                         </div>
@@ -31,4 +31,15 @@
         }
 
     </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">下一页</a>
+            </li>
+        </ul>
+    </nav>
 </div>

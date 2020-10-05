@@ -3,7 +3,7 @@
 <script src="/lib/ckeditor4/ckeditor.js"></script>
 
 <div class="container pt-4 pb-2">
-    <h1 class="display-4">Editor</h1>
+    <h1 class="display-4">编辑器</h1>
     <hr />
 
     <form asp-controller="Manager" asp-action="@ViewBag.Action" method="post">
@@ -19,7 +19,7 @@
                 <input asp-for="CoverUrl" type="text" autocomplete="off" class="form-control" id="coverUrl" />
                 <input id="fileSelector" type="file" onchange="uploadCover()" hidden />
                 <div class="input-group-append">
-                    <button id="uploading" class="btn btn-outline-secondary" type="button" onclick="showSelector()">Upload Cover</button>
+                    <button id="uploading" class="btn btn-outline-secondary" type="button" onclick="showSelector()">上传封面</button>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
 
     </form>
 
-    <button class="btn btn-primary mt-4 mb-4" onclick="upload()">Upload</button>
+    <button class="btn btn-primary mt-4 mb-4" onclick="upload()">保存文章</button>
 
     <script src="/js/manager/editor.js"></script>
 </div>

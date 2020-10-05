@@ -55,7 +55,7 @@ namespace EachOther.Controllers
             return View(article);
         }
 
-         [HttpPost]
+        [HttpPost]
         public IActionResult UploadCover([FromForm]IFormFile upload)
         {
             return Content(ossService.UploadCover(upload.OpenReadStream()));

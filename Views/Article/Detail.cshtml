@@ -11,7 +11,32 @@
     </p>
     <p>@Model.Overview</p>
     <hr />
-    <div>
+    <div class="mt-3 mb-3">
         @Html.Raw(Model.Content)
+    </div>
+
+    <form asp-controller="Blog" asp-action="Detail" method="post">
+        <input type="hidden" value="@Model.ArticleCode" name="ArticleCode"/>
+        <textarea class="form-control mb-2" rows="4" placeholder="Comment" maxlength="1024" name="Detail"></textarea>
+        <div class="row">
+            <div class="col">
+                <input id="btn_submit" type="submit" class="btn btn-success float-left" value="Submit" />
+            </div>
+        </div>
+    </form>
+
+    <div id="comments" class="mt-3">
+
+        <div class="card comment-item mb-3">
+            <div class="card-header">
+                <strong>LXY:</strong>
+                <span>hhhhhhhhhhhhhhhhhhhh</span>
+            </div>
+
+            <div class="card-body">
+                <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+            </div>
+        </div>
+
     </div>
 </div>
