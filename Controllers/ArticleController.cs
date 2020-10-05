@@ -40,7 +40,7 @@ namespace EachOther.Controllers
             return View();
         }
 
-        public IActionResult GetArticles(int index)
+        public IActionResult GetArticles(int index = 1)
         {
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
@@ -103,7 +103,7 @@ namespace EachOther.Controllers
             }
         }
 
-        public IActionResult Manager(int index)
+        public IActionResult Manager(int index = 1)
         {
             //管理逻辑
             string user = Request.Cookies["user"];
