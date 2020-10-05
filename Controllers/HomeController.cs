@@ -86,9 +86,16 @@ namespace EachOther.Controllers
             try
             {
                 cacheKey = Request.Cookies["user"];
+                if(cacheKey != "Male" || cacheKey != "Female")
+                {
+                    throw new Exception();
+                }
                 password = cache.Get(cacheKey).ToString();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                return View("Index");
+            }
 
             if (pwd == password && pwd != null && password != null)
             {

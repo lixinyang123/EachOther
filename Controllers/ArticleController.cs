@@ -106,6 +106,8 @@ namespace EachOther.Controllers
         //管理逻辑
         public IActionResult Manager()
         {
+            string user = Request.Cookies["user"];
+            List<Article> articles = articleDbContext.Articles.Where(i => i.User == user).ToList();
             return View();
         }
 
