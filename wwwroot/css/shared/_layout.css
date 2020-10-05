@@ -5,6 +5,10 @@ body {
     flex-direction: column;
 }
 
+a {
+    color: #666666;
+}
+
 .logo{
     width: 30px;
     height: 30px;
