@@ -103,6 +103,7 @@ namespace EachOther.Controllers
             }
         }
 
+        //管理逻辑
         public IActionResult Manager()
         {
             return View();
