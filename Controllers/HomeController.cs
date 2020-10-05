@@ -86,11 +86,14 @@ namespace EachOther.Controllers
             try
             {
                 cacheKey = Request.Cookies["user"];
-                if(cacheKey != "Male" || cacheKey != "Female")
+                if(cacheKey == "Male" || cacheKey == "Female")
+                {
+                    password = cache.Get(cacheKey).ToString();
+                }
+                else
                 {
                     throw new Exception();
                 }
-                password = cache.Get(cacheKey).ToString();
             }
             catch (Exception)
             {
