@@ -114,6 +114,12 @@ namespace EachOther.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("accessToken");
+            return RedirectToAction("Index", "Home");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
