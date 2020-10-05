@@ -20,7 +20,7 @@
                                 <p class="card-text">@article.Overview</p>
                                 <p class="card-text"><small class="text-muted">@article.Date</small></p>
                                 <div class="text-center">
-                                    <a asp-controller="Manager" asp-action="EditArticles" asp-route-id="@article.ArticleCode" class="btn btn-warning">Edit</a>
+                                    <a asp-controller="Manager" asp-action="EditArticle" asp-route-id="@article.ArticleCode" class="btn btn-warning">Edit</a>
                                     <a asp-controller="Manager" asp-action="RemoveArticle" asp-route-id="@article.ArticleCode" class="btn btn-danger">Delete</a>
                                 </div>
                             </div>

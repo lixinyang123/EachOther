@@ -90,9 +90,9 @@ namespace EachOther.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditArticles(string id)
+        public IActionResult EditArticle(string id)
         {
-            ViewBag.Action = "EditArticles";
+            ViewBag.Action = "EditArticle";
             Article article = articleDbContext.Articles.Single(i=>i.ArticleCode == id);
             ArticleViewModel viewModel = new ArticleViewModel()
             {
@@ -106,7 +106,7 @@ namespace EachOther.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditArticles(ArticleViewModel viewModel)
+        public IActionResult EditArticle(ArticleViewModel viewModel)
         {
             if(ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace EachOther.Controllers
             }
             else
             {
-                ViewBag.Action = "EditArticles";
+                ViewBag.Action = "EditArticle";
                 return View("Editor",viewModel);
             }
         }
