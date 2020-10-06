@@ -2,43 +2,61 @@
 
 <link rel="stylesheet" href="/css/manager/index.css" />
 
-<div class="container pt-5 pb-5">
+<div class="container pt-4 pb-4">
 
     <div class="row">
 
-        @foreach (var article in Model)
+        @if(Model.Count == 0)
         {
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-4 cover">
-                            <a href="/Article/Detail/@article.ArticleCode" class="img" style="background-image: url('@article.CoverUrl');"></a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="/Article/Detail/@article.ArticleCode">@article.Title</a></h5>
-                                <p class="card-text">@article.Overview</p>
-                                <p class="card-text"><small class="text-muted">@article.Date</small></p>
-                                <div class="text-center">
-                                    <a asp-controller="Manager" asp-action="EditArticle" asp-route-id="@article.ArticleCode" class="btn btn-warning">编辑</a>
-                                    <a asp-controller="Manager" asp-action="RemoveArticle" asp-route-id="@article.ArticleCode" class="btn btn-danger">删除</a>
+            <h2 class="display-4">这里什么也没有</h2>
+        }
+        else
+        {
+            foreach (var article in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 cover">
+                                <a href="/Article/Detail/@article.ArticleCode" class="img" style="background-image: url('@article.CoverUrl');"></a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="/Article/Detail/@article.ArticleCode">@article.Title</a></h5>
+                                    <p class="card-text">@article.Overview</p>
+                                    <p class="card-text"><small class="text-muted">@article.Date</small></p>
+                                    <div class="text-center">
+                                        <button onclick="window.location.href='/Manager/EditArticle/@article.ArticleCode'" class="btn btn-warning">编辑</button>
+                                        <button onclick="if(confirm('确定删除?')){window.location.href='/Manager/RemoveArticle/@article.ArticleCode'}" class="btn btn-danger">删除</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
 
     </div>
 
-    <nav aria-label="Page navigation example">
+    <nav class="mt-4" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" asp-controller="Manager" asp-action="Index" asp-route-index="@(ViewBag.CurrentIndex-1)">上一页</a>
+                @{
+                    string previous = "", next = "";
+                    if(ViewBag.CurrentIndex <= 1)
+                    {
+                        previous = "disabled";
+                    }
+                    if(ViewBag.CurrentIndex >= ViewBag.PageCount)
+                    {
+                        next = "disabled";
+                    }
+                }
+                <button @previous class="page-link" onclick="window.location.href='/Manager?index@(ViewBag.CurrentIndex-1)'">上一页</button>
             </li>
             <li class="page-item">
-                <a class="page-link" asp-controller="Manager" asp-action="Index" asp-route-index="@(ViewBag.CurrentIndex+1)">下一页</a>
+                <button @next class="page-link" onclick="window.location.href='/Manager?index@(ViewBag.CurrentIndex+1)'">下一页</button>
             </li>
         </ul>
     </nav>

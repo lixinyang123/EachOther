@@ -46,6 +46,7 @@ namespace EachOther.Controllers
             int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleDbContext.Articles.Count()) / pageSize));
             index = CorrectIndex(index,pageCount);
             ViewBag.CurrentIndex = index;
+            ViewBag.PageCount = pageCount;
             
             string user = Request.Cookies["user"];
             List<Article> articles = articleDbContext.Articles
