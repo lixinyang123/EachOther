@@ -58,7 +58,7 @@ function save() {
                 console.log("暂存失败");
             }
         });
-    },20000);
+    },5000);
 }
 
 function upload() {
