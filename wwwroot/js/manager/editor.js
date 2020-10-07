@@ -38,7 +38,7 @@ function uploadCover() {
     });
 }
 
-function save() {
+function autoSave() {
     setInterval(() => {
         let tempArticle = {
             Title: document.querySelector("#Title").value,
@@ -69,6 +69,6 @@ function upload() {
 CKEDITOR.replace('htmlEditor');
 CKEDITOR.instances.htmlEditor.setData(document.querySelector("#articleContent").value);
 if(window.location.href.includes("AddArticle")) {
-    console.log("启用暂存功能")
-    save();
+    console.log("启用暂存功能");
+    autoSave();
 }
