@@ -81,56 +81,52 @@ namespace EachOther.Controllers
         public IActionResult AddArticle()
         {
             ViewBag.Action = "AddArticle";
-            ArticleViewModel viewModel;
-            try
-            {
-                // 从缓存读取内容
-                viewModel = memoryCache.Get<ArticleViewModel>(Request.Cookies["user"]);        
-            }
-            catch (System.Exception)
+            
+            // 从缓存读取内容
+            ArticleViewModel viewModel = memoryCache.Get<ArticleViewModel>(Request.Cookies["user"]);
+            if(viewModel == null)
             {
                 viewModel = new ArticleViewModel();
             }
+            
             return View("Editor",viewModel);
         }
 
         [HttpPost]
         public IActionResult AddArticle(ArticleViewModel viewModel)
         {
-            if(ModelState.IsValid)
-            {
-                Article article = new Article()
-                {
-                    ArticleCode = Guid.NewGuid().ToString(),
-                    User = Request.Cookies["user"],
-                    Title = viewModel.Title,
-                    CoverUrl = viewModel.CoverUrl,
-                    Overview = viewModel.Overview,
-                    Content = viewModel.Content,
-                    Like = 0,
-                    Date = DateTime.Now.ToString()
-                };
-                articleDbContext.Articles.Add(article);
-                articleDbContext.SaveChanges();
-
-                // 移除缓存
-                memoryCache.Remove(Request.Cookies["user"]);
-
-                if(Request.Cookies["user"]=="Female")
-                {
-                    notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
-                }
-                if(Request.Cookies["user"]=="Male")
-                {
-                    notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
-                }
-                return RedirectToAction("Index","Article");
-            }
-            else
+            if(!ModelState.IsValid)
             {
                 ViewBag.Action = "AddArticle";
                 return View("Editor",viewModel);
             }
+
+            Article article = new Article()
+            {
+                ArticleCode = Guid.NewGuid().ToString(),
+                User = Request.Cookies["user"],
+                Title = viewModel.Title,
+                CoverUrl = viewModel.CoverUrl,
+                Overview = viewModel.Overview,
+                Content = viewModel.Content,
+                Like = 0,
+                Date = DateTime.Now.ToString()
+            };
+            articleDbContext.Articles.Add(article);
+            articleDbContext.SaveChanges();
+
+            // 移除缓存
+            memoryCache.Remove(Request.Cookies["user"]);
+
+            if(Request.Cookies["user"]=="Female")
+            {
+                notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+            }
+            if(Request.Cookies["user"]=="Male")
+            {
+                notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
+            }
+            return RedirectToAction("Index","Article");
         }
 
         public IActionResult RemoveArticle(string id)
