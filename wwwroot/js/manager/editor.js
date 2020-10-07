@@ -1,5 +1,5 @@
 function uploadingState(flag, text) {
-    var uploading = document.querySelector("#uploading");
+    let uploading = document.querySelector("#uploading");
     if (flag) {
         uploading.innerText = "Uploading...";
         uploading.setAttribute("disabled", "disabled");
@@ -17,7 +17,7 @@ function showSelector() {
 function uploadCover() {
     uploadingState(true, "Upload Cover");
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append("upload", document.querySelector("#fileSelector").files[0]);
 
     $.ajax({
@@ -36,6 +36,10 @@ function uploadCover() {
             uploadingState(false, "Upload Cover");
         }
     });
+}
+
+function save() {
+
 }
 
 function upload() {

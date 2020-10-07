@@ -1,7 +1,7 @@
 ﻿function getPassword() {
 
-    var sex = document.querySelector("select").value;
-    var url = '/Home/Login/' + sex;
+    let sex = document.querySelector("select").value;
+    let url = '/Home/Login/' + sex;
 
     $.ajax({
         url: url,
