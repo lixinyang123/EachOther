@@ -52,10 +52,10 @@ function save() {
             type: "POST",
             data: tempArticle,
             success: function () {
-                console.log("save successful");
+                console.log("暂存成功");
             },
             error: function () {
-                console.log("save defeat");
+                console.log("暂存失败");
             }
         });
     },20000);
@@ -68,4 +68,7 @@ function upload() {
 
 CKEDITOR.replace('htmlEditor');
 CKEDITOR.instances.htmlEditor.setData(document.querySelector("#articleContent").value);
-save();
+if(window.location.href.includes("AddArticle")) {
+    console.log("启用暂存功能")
+    save();
+}
