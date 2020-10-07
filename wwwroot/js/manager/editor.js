@@ -39,7 +39,26 @@ function uploadCover() {
 }
 
 function save() {
+    setInterval(() => {
+        let tempArticle = {
+            Title: document.querySelector("#Title").value,
+            CoverUrl: document.querySelector("#coverUrl").value,
+            Overview: document.querySelector("#Overview").value,
+            Content: CKEDITOR.instances.htmlEditor.getData()
+        };
 
+        $.ajax({
+            url: "/Manager/Save",
+            type: "POST",
+            data: tempArticle,
+            success: function () {
+                console.log("save successful");
+            },
+            error: function () {
+                console.log("save defeat");
+            }
+        });
+    },20000);
 }
 
 function upload() {
@@ -49,3 +68,4 @@ function upload() {
 
 CKEDITOR.replace('htmlEditor');
 CKEDITOR.instances.htmlEditor.setData(document.querySelector("#articleContent").value);
+save();

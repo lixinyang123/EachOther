@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using EachOther.Data;
 using EachOther.Filter;
 using EachOther.Models;
 using EachOther.Services;
 using EachOther.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 
 namespace EachOther.Controllers
@@ -17,15 +19,18 @@ namespace EachOther.Controllers
         private readonly ArticleDbContext articleDbContext;
         private readonly IConfiguration configuration;
         private readonly NotifyService notifyService;
+        private readonly IMemoryCache memoryCache;
         private readonly int pageSize;
 
         public ManagerController(IConfiguration configuration, 
             ArticleDbContext articleDbContext,
-            NotifyService notifyService)
+            NotifyService notifyService,
+            IMemoryCache memoryCache)
         {
             this.articleDbContext = articleDbContext;
             this.configuration = configuration;
             this.notifyService = notifyService;
+            this.memoryCache = memoryCache;
             pageSize = configuration.GetValue<int>("PageSize");
         }
 
@@ -58,10 +63,35 @@ namespace EachOther.Controllers
             return View(articles);
         }
 
+        [HttpPost]
+        public IActionResult Save(ArticleViewModel viewModel)
+        {
+            // 将临时文件存入缓存
+            try
+            {
+                memoryCache.Set<ArticleViewModel>(Request.Cookies["user"],viewModel,DateTimeOffset.Now.AddDays(1));
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                return NotFound();
+            }
+        }
+
         public IActionResult AddArticle()
         {
             ViewBag.Action = "AddArticle";
-            return View("Editor",new ArticleViewModel());
+            ArticleViewModel viewModel;
+            try
+            {
+                // 从缓存读取内容
+                viewModel = memoryCache.Get<ArticleViewModel>(Request.Cookies["user"]);        
+            }
+            catch (System.Exception)
+            {
+                viewModel = new ArticleViewModel();
+            }
+            return View("Editor",viewModel);
         }
 
         [HttpPost]
@@ -82,6 +112,9 @@ namespace EachOther.Controllers
                 };
                 articleDbContext.Articles.Add(article);
                 articleDbContext.SaveChanges();
+
+                // 移除缓存
+                memoryCache.Remove(Request.Cookies["user"]);
 
                 if(Request.Cookies["user"]=="Female")
                 {
