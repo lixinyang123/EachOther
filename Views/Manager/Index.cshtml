@@ -53,10 +53,10 @@
                         next = "disabled";
                     }
                 }
-                <button @previous class="page-link" onclick="window.location.href='/Manager?index@(ViewBag.CurrentIndex-1)'">上一页</button>
+                <button @previous class="page-link" onclick="window.location.href='/Manager?index=@(ViewBag.CurrentIndex-1)'">上一页</button>
             </li>
             <li class="page-item">
-                <button @next class="page-link" onclick="window.location.href='/Manager?index@(ViewBag.CurrentIndex+1)'">下一页</button>
+                <button @next class="page-link" onclick="window.location.href='/Manager?index=@(ViewBag.CurrentIndex+1)'">下一页</button>
             </li>
         </ul>
     </nav>
