@@ -4,6 +4,11 @@ namespace EachOther.Models
 {
     public class Article
     {
+        public Article()
+        {
+            Comments = new List<Comment>();
+        }
+
         public int Id {get; set;}
 
         public string ArticleCode {get; set;}

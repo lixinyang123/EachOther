@@ -11,32 +11,35 @@
     </p>
     <p>@Model.Overview</p>
     <hr />
-    <div class="mt-3 mb-3">
+    <div class="mt-3 mb-4">
         @Html.Raw(Model.Content)
     </div>
 
-    <form method="post">
-        <input type="hidden" value="@Model.ArticleCode" name="ArticleCode"/>
-        <textarea class="form-control mb-2" rows="4" placeholder="评论暂未开放" maxlength="1024" name="Detail"></textarea>
+    <form method="post" asp-controller="Article" asp-action="Detail">
+        <input type="hidden" value="@Model.ArticleCode" name="articleCode"/>
+        <textarea class="form-control mb-2" rows="4" placeholder="评论暂未开放" maxlength="1024" name="detail"></textarea>
         <div class="row">
             <div class="col">
-                <input disabled type="submit" class="btn btn-success float-left" value="发送" />
+                <input type="submit" class="btn btn-success float-left" value="发送" />
             </div>
         </div>
     </form>
 
-    <div id="comments" class="mt-3">
+    <div id="comments" class="mt-4">
 
-        <div class="card comment-item mb-3">
-            <div class="card-header">
-                <strong>LXY:</strong>
-                <span>测试评论</span>
-            </div>
+        @foreach (Comment comment in Model.Comments)
+        {
+            <div class="card comment-item mb-3">
+                <div class="card-header">
+                    <strong>@comment.User:</strong>
+                    <span>@comment.Date</span>
+                </div>
 
-            <div class="card-body">
-                <p>fjh❤~</p>
-            </div>
-        </div>
+                <div class="card-body">
+                    <p>@comment.Content</p>
+                </div>
+            </div>  
+        }
 
     </div>
 </div>

@@ -119,13 +119,11 @@ namespace EachOther.Controllers
             memoryCache.Remove(Request.Cookies["user"]);
 
             if(Request.Cookies["user"]=="Female")
-            {
                 notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
-            }
+
             if(Request.Cookies["user"]=="Male")
-            {
                 notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "你收到了一条新消息，访问 EachOther 查看");
-            }
+
             return RedirectToAction("Index","Article");
         }
 

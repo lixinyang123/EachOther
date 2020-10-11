@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace EachOther.Models
 {
@@ -11,10 +10,10 @@ namespace EachOther.Models
 
         public Article Article {get; set;}
 
+        public string User {get; set;}
+
         public string Content {get; set;}
 
         public DateTime Date {get; set;}
-
-        public List<Reply> Replies {get; set;}
     }
 }
