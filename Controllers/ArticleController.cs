@@ -84,11 +84,13 @@ namespace EachOther.Controllers
 
             articleDbContext.SaveChanges();
 
+            string msg = $"你的留言《{article.Title}》收到了新评论：{detail}";
+
             if(Request.Cookies["user"]=="Female")
-                notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", "新评论，访问 EachOther 查看");
+                notifyService.PushNotify(configuration.GetValue<string>("MaleSckey"), "EachOther", msg);
 
             if(Request.Cookies["user"]=="Male")
-                notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", "新评论，访问 EachOther 查看");
+                notifyService.PushNotify(configuration.GetValue<string>("FemaleSckey"), "EachOther", msg);
 
             return RedirectToAction("Detail", "Article", new {id = articleCode});
         }

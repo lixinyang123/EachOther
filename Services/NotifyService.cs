@@ -1,3 +1,4 @@
+using System.Web;
 using System.Net.Http;
 
 namespace EachOther.Services
@@ -6,7 +7,7 @@ namespace EachOther.Services
     {
         public void PushNotify(string sckey, string text, string desp)
         {
-            string url = $" https://sc.ftqq.com/{sckey}.send?text={text}&desp={desp}";
+            string url = $"https://sc.ftqq.com/{sckey}.send?text={text}&desp={desp}";
 
             new HttpClient().GetAsync(url);
         }
