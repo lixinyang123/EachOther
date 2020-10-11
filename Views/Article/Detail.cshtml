@@ -17,7 +17,7 @@
 
     <form method="post" asp-controller="Article" asp-action="Detail">
         <input type="hidden" value="@Model.ArticleCode" name="articleCode"/>
-        <textarea class="form-control mb-2" rows="4" placeholder="评论暂未开放" maxlength="1024" name="detail"></textarea>
+        <textarea class="form-control mb-2" rows="4" placeholder="评论内容" maxlength="1024" name="detail"></textarea>
         <div class="row">
             <div class="col">
                 <input type="submit" class="btn btn-success float-left" value="发送" />
