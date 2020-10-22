@@ -83,8 +83,15 @@ namespace EachOther.Controllers
             ViewBag.Action = "AddArticle";
             
             // 从缓存读取内容
-            ArticleViewModel viewModel = memoryCache.Get<ArticleViewModel>(Request.Cookies["user"]);
-            if(viewModel == null)
+            ArticleViewModel viewModel;
+
+            try
+            {
+                viewModel = memoryCache.Get<ArticleViewModel>(Request.Cookies["user"]);
+                if(viewModel == null)
+                    throw new Exception();
+            }
+            catch (System.Exception)
             {
                 viewModel = new ArticleViewModel();
             }
