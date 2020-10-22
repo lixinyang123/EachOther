@@ -48,7 +48,7 @@ function createArticle(article, active) {
                         <p class="meta">
                             <span>${article.Date}</span>
                             <span>|</span>
-                            <span>0 Comment</span>
+                            <span>${article.Comments.length} Comment</span>
                         </p>
                     </div>
                     <p class="mb-4">${article.Overview}</p>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using EachOther.Models;
 using EachOther.Filter;
@@ -10,6 +9,7 @@ using EachOther.Data;
 using EachOther.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace EachOther.Controllers
 {
@@ -43,11 +43,15 @@ namespace EachOther.Controllers
         public IActionResult GetArticles(int index = 1)
         {
             List<Article> articles = articleDbContext.Articles
+                .Include(i=>i.Comments)
                 .OrderByDescending(i=>i.Id)
                 .Skip((index-1)*pageSize)
                 .Take(pageSize).ToList();
 
-            return Content(JsonSerializer.Serialize(articles));
+            return Content(JsonConvert.SerializeObject(articles,new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }));
         }
 
         public IActionResult Detail(string id)
