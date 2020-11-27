@@ -40,8 +40,8 @@ namespace EachOther
                 });
             });
 
-            services.AddSingleton(new SecurityService("Key.txt", Guid.NewGuid().ToString().Replace("-", "")));
             services.AddSingleton<NotifyService>();
+            services.AddSingleton(new SecurityService("Key.txt", Guid.NewGuid().ToString().Replace("-", "")));
             services.AddSingleton(new OssService(Configuration.GetSection("OssConfig").Get<OssConfig>()));
         }
 
