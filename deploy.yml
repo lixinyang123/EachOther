@@ -6,6 +6,8 @@ services:
     image: lixinyang/eachother
     ports:
       - "8081:80"
+    depends_on:
+      - database
     volumes:
       - ./appsettings.json:/app/appsettings.json
       - ./data:/home
