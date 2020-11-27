@@ -20,7 +20,7 @@ namespace EachOther.Controllers
         private readonly IConfiguration configuration;
         private readonly NotifyService notifyService;
         private readonly IMemoryCache memoryCache;
-        private readonly int pageSize;
+        private readonly int pageSize = 6;
 
         public ManagerController(IConfiguration configuration, 
             ArticleDbContext articleDbContext,
@@ -31,7 +31,6 @@ namespace EachOther.Controllers
             this.configuration = configuration;
             this.notifyService = notifyService;
             this.memoryCache = memoryCache;
-            pageSize = configuration.GetValue<int>("PageSize");
         }
 
          //矫正页码
@@ -48,12 +47,16 @@ namespace EachOther.Controllers
         
         public IActionResult Index(int index = 1)
         {
-            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(articleDbContext.Articles.Count()) / pageSize));
+            string user = Request.Cookies["user"];
+
+            int pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(
+                articleDbContext.Articles
+                .Where(i => i.User == user).Count()
+            ) / pageSize));
             index = CorrectIndex(index,pageCount);
             ViewBag.CurrentIndex = index;
             ViewBag.PageCount = pageCount;
             
-            string user = Request.Cookies["user"];
             List<Article> articles = articleDbContext.Articles
                 .OrderByDescending(i=>i.Id)
                 .Where(i => i.User == user)

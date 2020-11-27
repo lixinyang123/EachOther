@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EachOther</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/home/index.css" />
+    <script src="/js/home/index.js"></script>
+</head>
+
+<body>
+    <!--body-->
+    <div id="main" class="container">
+        
+        <ul class="cb-slideshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row cb-slideshow-text-container ">
+
+                <div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+                    <header class="mb-5"><h4>EachOther</h4></header>
+                                        
+                    <form asp-controller="Home" asp-action="VerifyPassword" class="form-inline">
+                        <select onchange="getPassword()" class="custom-select mb-3">
+                            <option selected>Identity</option>
+                            <option value="0">FJH</option>
+                            <option value="1">LXY</option>
+                        </select>
+
+                        <input id="pwd" name="pwd" type="password" class="form-control mb-3" placeholder="Enter the verification code to sign in" hidden/>
+                        <input type="submit" class="btn btn-primary mb-3" value="Login"/>
+                    </form>
+
+                </div>
+            </div>
+            
+            <div class="footer-link">
+                <p><a href="/admin.html">&COPY; 2020 - EachOther</a></p>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

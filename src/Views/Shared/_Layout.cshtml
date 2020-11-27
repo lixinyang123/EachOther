@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EachOther</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/shared/_layout.css" />
+    
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!--header-->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Article" asp-action="Index">
+                &nbsp;EachOther
+            </a>
+            <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a asp-controller="Article" asp-action="Index" class="nav-link">主页</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-controller="Manager" asp-action="AddArticle" class="nav-link">留言</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-controller="Manager" asp-action="Index" class="nav-link">管理</a>
+                    </li>
+                </ul>
+                <a asp-controller="Home" asp-action="Logout" class="nav-link">退出</a>
+            </div>
+        </div>
+    </nav>
+
+    <!--body-->
+    <div id="content">
+        @RenderBody()
+    </div>
+
+    <!--footer-->
+    <footer class="bd-footer text-muted">
+  
+        <div class="container-fluid p-3 p-md-5 text-right">
+  
+            <p>Designed and Developed by
+                <a href="https://www.lllxy.net/" target="blank"><strong>LLLXY</strong></a>
+                ❤
+                <a href="https://付京华.我爱你/" target="blank"><strong>FJH</strong></a>
+            </p>
+  
+            <p>© 2020 - EachOther</p>
+        </div>
+  
+    </footer>
+
+</body>
+</html>
