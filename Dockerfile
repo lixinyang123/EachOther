@@ -13,6 +13,7 @@ RUN dotnet restore
 RUN dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 
 RUN ~/.dotnet/tools/libman restore
+RUN cp ./CKEditor_Config.js ./src/wwwroot/lib/ckeditor4/config.js
 RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
