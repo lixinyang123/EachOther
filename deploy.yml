@@ -8,6 +8,7 @@ services:
       - "8081:80"
     volumes:
       - ./appsettings.json:/app/appsettings.json
+      - ./data:/home
     restart: always
 
   database:
