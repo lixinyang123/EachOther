@@ -47,7 +47,8 @@ namespace EachOther
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ArticleDbContext articleDbContext)
         {
-            articleDbContext.Database.EnsureCreated();
+            if(!articleDbContext.Database.CanConnect())
+                articleDbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
             {
