@@ -9,8 +9,8 @@ services:
     depends_on:
       - database
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
     restart: always
 
   database:
