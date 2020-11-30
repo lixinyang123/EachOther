@@ -20,4 +20,3 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./data/db:/var/lib/mysql
-    restart: always
