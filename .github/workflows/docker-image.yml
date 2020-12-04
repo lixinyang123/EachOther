@@ -1,0 +1,25 @@
+name: Docker Image
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build CoreHome.HomePage
+      run: docker build --tag lixinyang/eachother:latest .
+    
+    - name: Push image to DockerHub
+      run: |
+        docker login -u lixinyang -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        docker push lixinyang/eachother:latest
+        docker logout
