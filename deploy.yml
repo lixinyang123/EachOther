@@ -8,15 +8,16 @@ services:
       - "8081:80"
     depends_on:
       - database
+    restart: always
     volumes:
       - ./appsettings.json:/app/appsettings.json
       - ./data:/home
-    restart: always
 
   database:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: password
+    restart: always
     volumes:
       - ./data/db:/var/lib/mysql
