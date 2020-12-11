@@ -5,15 +5,16 @@ using EachOther.Models;
 
 namespace EachOther.Services
 {
-    public class SecurityService : StaticConfig<string>
+    public class SecurityService : StaticConfig<Secret>
     {
         private readonly RijndaelManaged rijndaelManaged;
 
-        public SecurityService(string fileName, string initKey) : base(fileName, initKey)
+        public SecurityService(string fileName, Secret initSecret) : base(fileName, initSecret)
         {
             rijndaelManaged = new RijndaelManaged
             {
-                Key = Encoding.UTF8.GetBytes(Config),
+                IV = Encoding.UTF8.GetBytes(Config.IV),
+                Key = Encoding.UTF8.GetBytes(Config.Key),
                 Mode = CipherMode.ECB,
                 Padding = PaddingMode.PKCS7
             };

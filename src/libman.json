@@ -1,17 +1,17 @@
 {
   "version": "1.0",
-  "defaultProvider": "unpkg",
+  "defaultProvider": "jsdelivr",
   "libraries": [
     {
       "library": "jquery@3.5.1",
       "destination": "wwwroot/lib/jquery"
     },
     {
-      "library": "bootstrap@4.5.2",
+      "library": "bootstrap@4.5.3",
       "destination": "wwwroot/lib/bootstrap"
     },
     {
-      "library": "ckeditor4@4.14.1",
+      "library": "ckeditor@4.12.1",
       "destination": "wwwroot/lib/ckeditor4"
     }
   ]
