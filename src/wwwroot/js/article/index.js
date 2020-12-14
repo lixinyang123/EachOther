@@ -69,4 +69,16 @@ function showEnd() {
 function init() {
     pageCount = Number(document.querySelector("#pageCount").value);
     getArticles();
+
+    // check buttom
+    if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
+        if(index < pageCount) {
+            if(!loadingState) {
+                getArticles(++index);
+            }
+        }
+        else{
+            if(!isEnd) { showEnd(); }
+        }
+    }
 }

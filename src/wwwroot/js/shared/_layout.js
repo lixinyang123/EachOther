@@ -11,16 +11,4 @@ window.onscroll = () => {
     else {
         document.querySelector(".js-top").classList.remove("active");
     }
-
-    // check buttom
-    if(window.innerHeight + window.scrollY >= document.body.scrollHeight-1){
-        if(index < pageCount) {
-            if(!loadingState) {
-                getArticles(++index);
-            }
-        }
-        else{
-            if(!isEnd) { showEnd(); }
-        }
-    }
 }
