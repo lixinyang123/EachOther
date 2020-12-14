@@ -40,20 +40,23 @@
     </div>
 
     <nav class="mt-4">
+        @{
+            string previous = "", next = "";
+            if(ViewBag.CurrentIndex <= 1)
+            {
+                previous = "disabled";
+            }
+            if(ViewBag.CurrentIndex >= ViewBag.PageCount)
+            {
+                next = "disabled";
+            }
+        }
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                @{
-                    string previous = "", next = "";
-                    if(ViewBag.CurrentIndex <= 1)
-                    {
-                        previous = "disabled";
-                    }
-                    if(ViewBag.CurrentIndex >= ViewBag.PageCount)
-                    {
-                        next = "disabled";
-                    }
-                }
                 <button @previous class="page-link" onclick="window.location.href='/Manager?index=@(ViewBag.CurrentIndex-1)'">上一页</button>
+            </li>
+            <li class="page-item">
+                <button class="page-link" disabled>Page @ViewBag.CurrentIndex of @ViewBag.PageCount</button>
             </li>
             <li class="page-item">
                 <button @next class="page-link" onclick="window.location.href='/Manager?index=@(ViewBag.CurrentIndex+1)'">下一页</button>
