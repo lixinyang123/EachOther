@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build CoreHome.HomePage
+    - name: Build
       run: docker build --tag lixinyang/eachother:latest .
     
     - name: Push image to DockerHub
