@@ -34,10 +34,7 @@ namespace EachOther
 
             services.AddDbContext<ArticleDbContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("EachOther"), mySqlOptions =>
-                {
-                    mySqlOptions.ServerVersion(new ServerVersion(new Version(8, 0, 18), ServerType.MySql));
-                });
+                options.UseMySql(Configuration.GetConnectionString("EachOther"), new MySqlServerVersion(new Version(8, 0, 18)));
             });
 
             services.AddSingleton(new SecurityService("Key.txt", new Models.Secret()
