@@ -18,7 +18,7 @@
 }
 
 #loading .container {
-    padding-top: 3rem;
+    padding-top: 20px;
 }
 
 #loading .box {
@@ -34,6 +34,26 @@
     background-size: 200% 100%;
     background-position-x: 120%;
     animation: 1s loading ease-in-out infinite;
+}
+
+.box-3 {
+    width: 30%;
+}
+
+.box-4 {
+    width: 40%;
+}
+
+.box-6 {
+    width: 60%;
+}
+
+.box-8 {
+    width: 80%;
+}
+
+.box-10 {
+    width: 100%;
 }
 
 @keyframes loading {
