@@ -1,4 +1,3 @@
-using System;
 using EachOther.Data;
 using EachOther.Models;
 using EachOther.Services;
@@ -9,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Pomelo.EntityFrameworkCore.MySql.Storage;
+using System;
 
 namespace EachOther
 {
@@ -48,7 +46,7 @@ namespace EachOther
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ArticleDbContext articleDbContext)
         {
-            if(!articleDbContext.Database.CanConnect())
+            if (!articleDbContext.Database.CanConnect())
                 articleDbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
