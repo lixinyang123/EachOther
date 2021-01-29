@@ -1,8 +1,8 @@
+using Aliyun.OSS;
+using EachOther.Models;
 using System;
 using System.IO;
 using System.Web;
-using Aliyun.OSS;
-using EachOther.Models;
 
 namespace EachOther.Services
 {
@@ -21,16 +21,16 @@ namespace EachOther.Services
         {
             string fileName = Guid.NewGuid().ToString() + ".jpg";
             string path = "covers/";
-            client.PutObject(config.BucketName, path + fileName, stream);
-            return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
+            client.PutObject(config.BucketName, Path.Combine(path, fileName), stream);
+            return Path.Combine(config.BucketDomainName, path) + HttpUtility.UrlEncode(fileName);
         }
 
         public string UploadPic(Stream stream)
         {
             string fileName = Guid.NewGuid().ToString() + ".jpg";
             string path = "articles/";
-            client.PutObject(config.BucketName, path + fileName, stream);
-            return config.BucketDomainName + path + HttpUtility.UrlEncode(fileName);
+            client.PutObject(config.BucketName, Path.Combine(path, fileName), stream);
+            return Path.Combine(config.BucketDomainName, path) + HttpUtility.UrlEncode(fileName);
         }
     }
 }

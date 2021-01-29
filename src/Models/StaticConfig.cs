@@ -38,7 +38,7 @@ namespace EachOther.Models
                 configPath = @"/home/Server/EachOther/";
             }
 
-            configFile = configPath + fileName;
+            configFile = Path.Combine(configPath, fileName);
 
             if (!Directory.Exists(configPath))
             {
