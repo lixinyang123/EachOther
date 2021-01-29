@@ -23,3 +23,10 @@ jobs:
         docker login -u lixinyang -p ${{ secrets.DOCKERHUB_PASSWORD }}
         docker push lixinyang/eachother:latest
         docker logout
+
+    - name: Push image to aliyun
+      run: |
+        docker login -u=lllxy啊啊啊 -p ${{ secrets.DOCKERHUB_PASSWORD }} registry.cn-shenzhen.aliyuncs.com
+        docker tag lixinyang/eachother:latest registry.cn-shenzhen.aliyuncs.com/lllxy/eachother:latest
+        docker push registry.cn-shenzhen.aliyuncs.com/lllxy/eachother:latest
+        docker logout
