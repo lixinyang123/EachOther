@@ -39,7 +39,7 @@ function getArticles() {
 function createArticle(article, active) {
 
     let html = `
-        <div class="col-md-4 d-flex">
+        <div class="col-md-4 d-flex animate__animated animate__jackInTheBox">
             <div class="blog-entry ${active}">
                 <a href="/Article/Detail/${article.ArticleCode}" class="img" style="background-image: url(${article.CoverUrl});"></a>
                 <div class="text p-4">

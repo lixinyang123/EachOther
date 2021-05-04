@@ -24,8 +24,8 @@
     max-width: 540px;
 }
 
-.card:hover{
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+.card:hover {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
 }
 
 .card .cover{
@@ -44,6 +44,6 @@
     transition: transform 0.2s ease-out;
 }
 
-.card .cover a:hover{
+.card:hover a{
     transform: scale(1.07);
 }
