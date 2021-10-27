@@ -13,24 +13,25 @@ function getArticles() {
         dataType: 'text',
         success: function (data) {
             let articles = JSON.parse(data.toString());
-            if(articles.length != 0){
-                
-                document.querySelector("#loading").setAttribute("hidden","hidden");
 
-                for(let i=0;i<articles.length;i++){
-                    if(i%2 == 0) {
-                        createArticle(articles[i],"active");
-                    }
-                    else{
-                        createArticle(articles[i],"");
-                    }
-                }
-
-                loadingState = false;
-            }
-            else {
+            if (articles.length == 0) {
                 document.querySelector("#nothing").removeAttribute("hidden");
+                document.querySelector("#loading > .container").setAttribute("hidden", "hidden");
+                return;
             }
+
+            document.querySelector("#loading").setAttribute("hidden", "hidden");
+
+            for (let i = 0; i < articles.length; i++) {
+                if (i % 2 == 0) {
+                    createArticle(articles[i], "active");
+                }
+                else {
+                    createArticle(articles[i], "");
+                }
+            }
+
+            loadingState = false;
         },
         error: error => console.log(error)
     });
